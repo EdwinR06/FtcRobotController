@@ -47,32 +47,34 @@ public class TestTeleOp extends OpMode {
   private DcMotor frontRightMotor;
   private DcMotor backLeftMotor;
   private DcMotor backRightMotor;
-
-  private Servo feeder;
+  private DcMotor intakeOutput;
 
   double drive;
   double strafe;
   double turn;
-  boolean servoMovement;
+  double intake;
+  double output;
 
   @Override
   public void init() {
     telemetry.addData("Status", "Initialized");
-    frontLeftMotor = hardwareMap.get(DcMotor.class, "front_left_motor");
-    frontRightMotor = hardwareMap.get(DcMotor.class, "front_right_motor");
-    backLeftMotor = hardwareMap.get(DcMotor.class, "back_left_motor");
-    backRightMotor = hardwareMap.get(DcMotor.class, "back_right_motor");
-    feeder = hardwareMap.get(Servo.class, "feeder");
+    frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
+    frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
+    backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
+    backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
+    intakeOutput = hardwareMap.get(DcMotor.class, "intakeOutput");
 
     frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    intakeOutput.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
     frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
     backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
     frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
     backRightMotor.setDirection(DcMotor.Direction.REVERSE);
+    intakeOutput.setDirection(DcMotor.Direction.FORWARD);
   }
 
   /*
@@ -100,15 +102,18 @@ public class TestTeleOp extends OpMode {
   public void loop() {
     telemetry.addData("Status", "Run Time: " + runtime.toString());
 
-    drive = gamepad1.right_stick_y;
+    drive = -gamepad1.right_stick_y;
     strafe = -gamepad1.right_stick_x;
     turn = -gamepad1.left_stick_x;
-    servoMovement = gamepad2.a;
+    intake = gamepad2.right_trigger;
+    output = -gamepad2.left_trigger;
+
 
     frontLeftMotor.setPower(drive + strafe + turn);
     backLeftMotor.setPower(drive - strafe + turn);
     frontRightMotor.setPower(drive - strafe - turn);
     backRightMotor.setPower(drive + strafe - turn);
+    intakeOutput.setPower(intake + output);
 
   }
 }
