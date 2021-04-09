@@ -47,13 +47,17 @@ public class TestTeleOp extends OpMode {
   private DcMotor frontRightMotor;
   private DcMotor backLeftMotor;
   private DcMotor backRightMotor;
-  private DcMotor intakeOutput;
+  private DcMotor intakeMotor;
+  private DcMotor liftMotor;
 
   double drive;
   double strafe;
   double turn;
   double intake;
   double output;
+  boolean lift;
+  boolean downLift;
+
 
   @Override
   public void init() {
@@ -62,19 +66,22 @@ public class TestTeleOp extends OpMode {
     frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
     backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
     backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-    intakeOutput = hardwareMap.get(DcMotor.class, "intakeOutput");
+    intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
+    liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
 
     frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    intakeOutput.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
     frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
     backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
     frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
     backRightMotor.setDirection(DcMotor.Direction.REVERSE);
-    intakeOutput.setDirection(DcMotor.Direction.FORWARD);
+    intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+    liftMotor.setDirection(DcMotor.Direction.FORWARD);
   }
 
   /*
@@ -106,14 +113,21 @@ public class TestTeleOp extends OpMode {
     strafe = -gamepad1.right_stick_x;
     turn = -gamepad1.left_stick_x;
     intake = gamepad2.right_trigger;
-    output = -gamepad2.left_trigger;
+    output = gamepad2.left_trigger;
+    lift = gamepad2.y;
+    downLift = gamepad2.x;
 
 
     frontLeftMotor.setPower(drive + strafe + turn);
     backLeftMotor.setPower(drive - strafe + turn);
     frontRightMotor.setPower(drive - strafe - turn);
     backRightMotor.setPower(drive + strafe - turn);
-    intakeOutput.setPower(intake + output);
+    intakeMotor.setPower(intake + output);
 
+    if (lift) {
+      liftMotor.setPower(1);
+  } else if (downLift) {
+      liftMotor.setPower(-1);
+    }
   }
 }
