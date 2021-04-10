@@ -126,7 +126,7 @@ public class TestTeleOp extends OpMode {
 
     if (lift) {
       liftMotor.setPower(1);
-  } else if (downLift) {
+    } else if (downLift) {
       liftMotor.setPower(-1);
     }
   }

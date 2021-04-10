@@ -29,34 +29,34 @@
 
 package org.firstinspires.ftc.teamcode.shared;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /**
- * Skippy Auto Op Mode
+ * Test Auto Op Mode
  */
-@TeleOp(name = "Skippy Auto")
+@Autonomous(name = "Test Auto")
 //@Disabled
-public class SkippyAuto extends LinearOpMode {
-  private ElapsedTime runtime = new ElapsedTime();
+public class TestAuto extends LinearOpMode {
+    private Robot robot;
 
-  private Skippy skippy;
+    @Override
+    public void runOpMode() {
+        FTCUtil.setOpMode(this);
+        DcMotor frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
 
-  @Override
-  public void runOpMode() throws InterruptedException {
-//    try {
-//      FTCUtil.hardwareMap = hardwareMap;
-//      FTCUtil.telemetry = telemetry;
-//      skippy = new Skippy();
-//      //Make a path here for Skippy to follow
-//      waitForStart();
-//      skippy.chassis.drive(12, 1);
-//      sleep(5000);
-//    } catch (Exception e) {
-//      e.printStackTrace();
-//    }
 
-    opModeIsActive();
-  }
+        waitForStart();
+        while (opModeIsActive()) {
+            telemetry.addData("encoder_value", frontLeftMotor.getCurrentPosition());
+            telemetry.update();
+        }
+
+
+
+        sleep(2000);
+    }
 }

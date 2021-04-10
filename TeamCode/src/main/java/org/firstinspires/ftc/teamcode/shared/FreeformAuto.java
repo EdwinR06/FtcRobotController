@@ -29,34 +29,28 @@
 
 package org.firstinspires.ftc.teamcode.shared;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * Skippy Auto Op Mode
+ * Freeform Auto Op Mode
  */
-@TeleOp(name = "Skippy Auto")
+@Autonomous(name = "Freeform Auto")
 //@Disabled
-public class SkippyAuto extends LinearOpMode {
-  private ElapsedTime runtime = new ElapsedTime();
+public class FreeformAuto extends LinearOpMode {
+    private Robot robot;
 
-  private Skippy skippy;
+    @Override
+    public void runOpMode() {
+        FTCUtil.setOpMode(this);
+        robot = new Robot();
+        Chassis chassis = robot.getChassis();
 
-  @Override
-  public void runOpMode() throws InterruptedException {
-//    try {
-//      FTCUtil.hardwareMap = hardwareMap;
-//      FTCUtil.telemetry = telemetry;
-//      skippy = new Skippy();
-//      //Make a path here for Skippy to follow
-//      waitForStart();
-//      skippy.chassis.drive(12, 1);
-//      sleep(5000);
-//    } catch (Exception e) {
-//      e.printStackTrace();
-//    }
+        waitForStart();
+        chassis.driveStraight(1, .5);
 
-    opModeIsActive();
-  }
+        sleep(2000);
+    }
 }
