@@ -55,8 +55,6 @@ public class TestAuto extends LinearOpMode {
             telemetry.update();
         }
 
-
-
         sleep(2000);
     }
 }
