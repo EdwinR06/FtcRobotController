@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.shared;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class Chassis {
     private DriveWheel frontLeft;
@@ -11,10 +12,10 @@ public class Chassis {
 
     public Chassis() {
         FTCUtil.telemetry.addData("Status", "Initialized");
-        frontLeft = new DriveWheel("frontLeftMotor", DcMotor.Direction.FORWARD);
-        frontRight = new DriveWheel("frontRightMotor", DcMotor.Direction.REVERSE);
-        backLeft = new DriveWheel( "backLeftMotor", DcMotor.Direction.FORWARD);
-        backRight = new DriveWheel( "backRightMotor", DcMotor.Direction.REVERSE);
+        frontLeft = new DriveWheel("frontLeftMotor", DcMotor.Direction.REVERSE);
+        frontRight = new DriveWheel("frontRightMotor", DcMotor.Direction.FORWARD);
+        backLeft = new DriveWheel( "backLeftMotor", DcMotor.Direction.REVERSE);
+        backRight = new DriveWheel( "backRightMotor", DcMotor.Direction.FORWARD);
     }
 
     private void stopMotors() {
@@ -24,7 +25,7 @@ public class Chassis {
         backLeft.setPower(0);
     }
 
-    private void setPowers(double motorPower){
+    public void setPowers(double motorPower){
         frontLeft.setPower(motorPower);
         frontRight.setPower(motorPower);
         backLeft.setPower(motorPower);
