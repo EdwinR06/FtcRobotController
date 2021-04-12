@@ -13,6 +13,7 @@ public class DriveWheel {
         dcMotor = FTCUtil.hardwareMap.get(DcMotor.class, deviceName);
         dcMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         dcMotor.setDirection(direction);
+        dcMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     public void setMode(DcMotor.RunMode mode) {

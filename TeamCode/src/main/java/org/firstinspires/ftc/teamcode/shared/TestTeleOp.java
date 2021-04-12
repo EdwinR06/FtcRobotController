@@ -49,6 +49,7 @@ public class TestTeleOp extends OpMode {
   private DcMotor backRightMotor;
   private DcMotor intakeMotor;
   private DcMotor liftMotor;
+  private Chassis chassis;
 
   double drive;
   double strafe;
@@ -61,27 +62,31 @@ public class TestTeleOp extends OpMode {
 
   @Override
   public void init() {
-    telemetry.addData("Status", "Initialized");
+    FTCUtil.setOpMode(this);
+
+    /*telemetry.addData("Status", "Initialized");
     frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
     frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
     backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
     backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-    intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-    liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
+    //intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
+    //liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
 
     frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    //intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    //liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
     frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
     backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
     frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
     backRightMotor.setDirection(DcMotor.Direction.REVERSE);
-    intakeMotor.setDirection(DcMotor.Direction.FORWARD);
-    liftMotor.setDirection(DcMotor.Direction.FORWARD);
+    //intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+    //liftMotor.setDirection(DcMotor.Direction.FORWARD);*/
+
+    chassis = new Chassis();
   }
 
   /*
@@ -109,8 +114,8 @@ public class TestTeleOp extends OpMode {
   public void loop() {
     telemetry.addData("Status", "Run Time: " + runtime.toString());
 
-    drive = -gamepad1.right_stick_y;
-    strafe = -gamepad1.right_stick_x;
+    drive = gamepad1.right_stick_y;
+    strafe = gamepad1.right_stick_x;
     turn = -gamepad1.left_stick_x;
     intake = gamepad2.right_trigger;
     output = gamepad2.left_trigger;
@@ -118,16 +123,18 @@ public class TestTeleOp extends OpMode {
     downLift = gamepad2.x;
 
 
-    frontLeftMotor.setPower(drive + strafe + turn);
+    chassis.drive(drive, turn, strafe);
+
+    /*frontLeftMotor.setPower(drive + strafe + turn);
     backLeftMotor.setPower(drive - strafe + turn);
     frontRightMotor.setPower(drive - strafe - turn);
     backRightMotor.setPower(drive + strafe - turn);
-    intakeMotor.setPower(intake + output);
+    //intakeMotor.setPower(intake + output);
 
-    if (lift) {
+    /*if (lift) {
       liftMotor.setPower(1);
     } else if (downLift) {
       liftMotor.setPower(-1);
-    }
+    }*/
   }
 }
