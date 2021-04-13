@@ -130,12 +130,12 @@ public class TestTeleOp extends OpMode {
     backLeftMotor.setPower(drive - strafe + turn);
     frontRightMotor.setPower(drive - strafe - turn);
     backRightMotor.setPower(drive + strafe - turn);
-    //intakeMotor.setPower(intake + output);
+    //intakeMotor.setPower(intake + output);*/
 
-    /*if (lift) {
-      liftMotor.setPower(1);
+    if (lift) {
+      chassis.lift();
     } else if (downLift) {
-      liftMotor.setPower(-1);
-    }*/
+      chassis.downLift();
+    }
   }
 }
