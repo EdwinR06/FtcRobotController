@@ -8,6 +8,7 @@ public class Chassis {
     private DriveWheel frontRight;
     private DriveWheel backLeft;
     private DriveWheel backRight;
+    private DriveWheel intake;
     private static final double LOOK_AHEAD_DISTANCE = 12;
 
     public Chassis() {
@@ -16,6 +17,7 @@ public class Chassis {
         frontRight = new DriveWheel("frontRightMotor", DcMotor.Direction.FORWARD);
         backLeft = new DriveWheel( "backLeftMotor", DcMotor.Direction.REVERSE);
         backRight = new DriveWheel( "backRightMotor", DcMotor.Direction.FORWARD);
+        //intake = new DriveWheel("intakeMotor", DcMotor.Direction.FORWARD);
     }
 
     private void stopMotors() {
@@ -48,15 +50,15 @@ public class Chassis {
         frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if (directionLeft) {
-            frontLeft.setPower(-power);
-            backRight.setPower(-power);
-            frontRight.setPower(power);
-            backLeft.setPower(power);
-        } else {
-            frontRight.setPower(-power);
-            backLeft.setPower(-power);
             frontLeft.setPower(power);
             backRight.setPower(power);
+            frontRight.setPower(-power);
+            backLeft.setPower(-power);
+        } else {
+            frontRight.setPower(power);
+            backLeft.setPower(power);
+            frontLeft.setPower(-power);
+            backRight.setPower(-power);
         }
 
         while(Math.abs(frontLeft.getDistance()) < Math.abs(distance) && FTCUtil.getOpMode().opModeIsActive()){
@@ -69,5 +71,9 @@ public class Chassis {
         backLeft.setPower(straight - strafe + turn);
         frontRight.setPower(straight - strafe - turn);
         backRight.setPower(straight + strafe - turn);
+    }
+
+    public void intake(double power) {
+
     }
 }

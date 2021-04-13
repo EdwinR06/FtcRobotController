@@ -62,7 +62,7 @@ public class TestTeleOp extends OpMode {
 
   @Override
   public void init() {
-    FTCUtil.setOpMode(this);
+    //FTCUtil.setOpMode(this);
 
     /*telemetry.addData("Status", "Initialized");
     frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
@@ -122,8 +122,8 @@ public class TestTeleOp extends OpMode {
     lift = gamepad2.y;
     downLift = gamepad2.x;
 
-
-    chassis.drive(drive, turn, strafe);
+    backLeftMotor.setPower(1);
+    //chassis.drive(drive, turn, strafe);
 
     /*frontLeftMotor.setPower(drive + strafe + turn);
     backLeftMotor.setPower(drive - strafe + turn);
