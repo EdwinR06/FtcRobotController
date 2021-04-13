@@ -8,7 +8,8 @@ public class Chassis {
     private DriveWheel frontRight;
     private DriveWheel backLeft;
     private DriveWheel backRight;
-    private DriveWheel intake;
+    private DriveWheel intakeMotor;
+    private DriveWheel liftMotor;
     private static final double LOOK_AHEAD_DISTANCE = 12;
 
     public Chassis() {
@@ -17,7 +18,8 @@ public class Chassis {
         frontRight = new DriveWheel("frontRightMotor", DcMotor.Direction.FORWARD);
         backLeft = new DriveWheel( "backLeftMotor", DcMotor.Direction.REVERSE);
         backRight = new DriveWheel( "backRightMotor", DcMotor.Direction.FORWARD);
-        //intake = new DriveWheel("intakeMotor", DcMotor.Direction.FORWARD);
+        intakeMotor = new DriveWheel("intakeMotor", DcMotor.Direction.FORWARD);
+        liftMotor = new DriveWheel("liftMotor", DcMotor.Direction.FORWARD);
     }
 
     private void stopMotors() {
@@ -74,6 +76,18 @@ public class Chassis {
     }
 
     public void intake(double power) {
+        intakeMotor.setPower(power);
+    }
+
+    public void deposit(double power) {
+        intakeMotor.setPower(-power);
+    }
+
+    public void lift(){
+        liftMotor.resetEncoder();
+        liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
     }
+
 }
