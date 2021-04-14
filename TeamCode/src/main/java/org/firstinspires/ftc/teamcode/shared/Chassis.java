@@ -90,6 +90,7 @@ public class Chassis {
 
         liftMotor.setPower(.25);
         while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.getOpMode().opModeIsActive()) {
+            FTCUtil.telemetry.addData("Encoder", liftMotor.getDistance());
         }
         liftMotor.setPower(0);
     }
@@ -101,6 +102,7 @@ public class Chassis {
 
         liftMotor.setPower(-(.25));
         while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.getOpMode().opModeIsActive()) {
+            FTCUtil.telemetry.addData("Encoder", "Encoder: " + liftMotor.getDistance()).toString();
         }
         liftMotor.setPower(0);
     }
