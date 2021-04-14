@@ -62,7 +62,7 @@ public class TestTeleOp extends OpMode {
 
   @Override
   public void init() {
-    FTCUtil.setOpMode(this);
+    //FTCUtil.setOpMode(this);
 
     /*telemetry.addData("Status", "Initialized");
     frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
