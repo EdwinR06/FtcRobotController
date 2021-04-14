@@ -86,11 +86,10 @@ public class Chassis {
     public void lift(){
         liftMotor.resetEncoder();
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        int liftDistance = 1;
+        int liftDistance = 15;
 
         liftMotor.setPower(.25);
         while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.getOpMode().opModeIsActive()) {
-            FTCUtil.telemetry.addData("Encoder", liftMotor.getDistance());
         }
         liftMotor.setPower(0);
     }
@@ -98,11 +97,10 @@ public class Chassis {
     public void downLift(){
         liftMotor.resetEncoder();
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        int liftDistance = 1;
+        int liftDistance = 15;
 
         liftMotor.setPower(-(.25));
         while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.getOpMode().opModeIsActive()) {
-            FTCUtil.telemetry.addData("Encoder", "Encoder: " + liftMotor.getDistance()).toString();
         }
         liftMotor.setPower(0);
     }
