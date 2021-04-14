@@ -42,7 +42,7 @@ public class Chassis {
 
         setPowers(power);
 
-        while (Math.abs(frontLeft.getDistance()) < Math.abs(distance) && FTCUtil.getOpMode().opModeIsActive()) {
+        while (Math.abs(frontLeft.getDistance()) < Math.abs(distance) && FTCUtil.isOpModeActive()) {
         }
         stopMotors();
     }
@@ -63,7 +63,7 @@ public class Chassis {
             backRight.setPower(-power);
         }
 
-        while(Math.abs(frontLeft.getDistance()) < Math.abs(distance) && FTCUtil.getOpMode().opModeIsActive()){
+        while(Math.abs(frontLeft.getDistance()) < Math.abs(distance) && FTCUtil.isOpModeActive()){
         }
         stopMotors();
     }
@@ -89,7 +89,7 @@ public class Chassis {
         int liftDistance = 25;
 
         liftMotor.setPower(.25);
-        while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.getOpMode().opModeIsActive()) {
+        while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.isOpModeActive()) {
         }
         liftMotor.setPower(0);
     }
@@ -100,7 +100,7 @@ public class Chassis {
         int liftDistance = 25;
 
         liftMotor.setPower(-(.25));
-        while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.getOpMode().opModeIsActive()) {
+        while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.isOpModeActive()) {
         }
         liftMotor.setPower(0);
     }

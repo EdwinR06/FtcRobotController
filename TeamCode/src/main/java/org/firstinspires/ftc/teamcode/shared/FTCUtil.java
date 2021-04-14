@@ -10,15 +10,26 @@ public class FTCUtil {
     public static HardwareMap hardwareMap;
     public static Telemetry telemetry;
     public static GridLogger gridLogger;
-    private static LinearOpMode opMode;
+    private static OpMode opMode;
+    private static LinearOpMode linearOpMode;
 
-    public static void setOpMode(LinearOpMode opMode){
+    public static void setOpMode(OpMode opMode){
         FTCUtil.opMode = opMode;
         FTCUtil.telemetry = opMode.telemetry;
         FTCUtil.hardwareMap = opMode.hardwareMap;
+
+        if(opMode instanceof LinearOpMode){
+            linearOpMode = (LinearOpMode)opMode;
+        }
     }
 
-    public static LinearOpMode getOpMode() {
+    public static OpMode getOpMode() {
         return opMode;
+    }
+
+    public static boolean isOpModeActive(){
+        if (linearOpMode != null){
+            return linearOpMode.opModeIsActive();
+        } else return true;
     }
 }
