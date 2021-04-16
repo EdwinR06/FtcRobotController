@@ -38,4 +38,8 @@ public class DriveWheel {
         double motorTarget = dcMotor.getCurrentPosition() + (distanceInches * ticksPerRotation);
         dcMotor.setTargetPosition((int) motorTarget);
     }
+
+    public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior mode) {
+
+    }
 }

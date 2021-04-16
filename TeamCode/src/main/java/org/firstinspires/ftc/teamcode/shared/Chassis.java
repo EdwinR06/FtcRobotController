@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.shared;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
+
 
 public class Chassis {
     private DriveWheel frontLeft;
@@ -92,6 +94,7 @@ public class Chassis {
         while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.isOpModeActive()) {
         }
         liftMotor.setPower(0);
+        liftMotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
     }
 
     public void downLift(){
@@ -103,5 +106,6 @@ public class Chassis {
         while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.isOpModeActive()) {
         }
         liftMotor.setPower(0);
+
     }
 }

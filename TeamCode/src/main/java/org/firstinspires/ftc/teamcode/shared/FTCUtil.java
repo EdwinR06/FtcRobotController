@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.shared;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -32,4 +33,5 @@ public class FTCUtil {
             return linearOpMode.opModeIsActive();
         } else return true;
     }
+
 }
