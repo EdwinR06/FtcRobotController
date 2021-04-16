@@ -115,6 +115,10 @@ public class Chassis {
         stringPuller.setPower(-.25);
     }
 
+    public void stringZero() {
+        stringPuller.setPower(0);
+    }
+
     /*public void downLift(){
         liftMotor.resetEncoder();
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

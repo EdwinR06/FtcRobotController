@@ -101,8 +101,8 @@ public class TestTeleOp extends OpMode {
     output = gamepad2.left_trigger;
     lift = gamepad2.y;
     downLift = gamepad2.x;
-    stringIn = gamepad1.y;
-    stringOut = gamepad1.x;
+    stringOut = gamepad1.right_bumper;
+    stringIn = gamepad1.left_bumper;
 
     chassis.drive(drive, turn, strafe);
     chassis.intake(intake);
@@ -126,6 +126,8 @@ public class TestTeleOp extends OpMode {
       chassis.stringIn();
     } else if (stringOut) {
       chassis.stringOut();
+    } else {
+      chassis.stringZero();
     }
   }
 }
