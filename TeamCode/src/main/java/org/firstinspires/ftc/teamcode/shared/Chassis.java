@@ -88,7 +88,7 @@ public class Chassis {
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         int liftDistance = 25;
 
-        liftMotor.setPower(.25);
+        liftMotor.setPower(.4);
         while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.isOpModeActive()) {
         }
         liftMotor.setPower(0);

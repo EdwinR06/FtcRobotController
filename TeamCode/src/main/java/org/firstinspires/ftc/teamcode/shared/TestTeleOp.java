@@ -64,28 +64,6 @@ public class TestTeleOp extends OpMode {
   public void init() {
     FTCUtil.setOpMode(this);
 
-    /*telemetry.addData("Status", "Initialized");
-    frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-    frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-    backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-    backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-    //intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-    //liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
-
-    frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    //intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    //liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-    frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-    backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-    frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
-    backRightMotor.setDirection(DcMotor.Direction.REVERSE);
-    //intakeMotor.setDirection(DcMotor.Direction.FORWARD);
-    //liftMotor.setDirection(DcMotor.Direction.FORWARD);*/
-
     chassis = new Chassis();
   }
 
@@ -114,9 +92,9 @@ public class TestTeleOp extends OpMode {
   public void loop() {
     telemetry.addData("Status", "Run Time: " + runtime.toString());
 
-    drive = gamepad1.right_stick_y;
-    strafe = gamepad1.right_stick_x;
-    turn = -gamepad1.left_stick_x;
+    drive = -gamepad1.left_stick_y;
+    strafe = -gamepad1.left_stick_x;
+    turn = gamepad1.right_stick_x;
     intake = gamepad2.right_trigger;
     output = gamepad2.left_trigger;
     lift = gamepad2.y;
