@@ -12,6 +12,7 @@ public class Chassis {
     private DriveWheel backRight;
     private DriveWheel intakeMotor;
     private DriveWheel liftMotor;
+    private DriveWheel stringPuller;
     private static final double LOOK_AHEAD_DISTANCE = 12;
 
     public Chassis() {
@@ -22,6 +23,7 @@ public class Chassis {
         backRight = new DriveWheel( "backRightMotor", DcMotor.Direction.FORWARD);
         intakeMotor = new DriveWheel("intakeMotor", DcMotor.Direction.FORWARD);
         liftMotor = new DriveWheel("liftMotor", DcMotor.Direction.FORWARD);
+        stringPuller = new DriveWheel("stringPullerMotor", DcMotor.Direction.FORWARD);
     }
 
     private void stopMotors() {
@@ -105,6 +107,13 @@ public class Chassis {
         liftMotor.setPower(-.3);
     }
 
+    public void stringIn() {
+        stringPuller.setPower(.25);
+    }
+
+    public void stringOut() {
+        stringPuller.setPower(-.25);
+    }
 
     /*public void downLift(){
         liftMotor.resetEncoder();
