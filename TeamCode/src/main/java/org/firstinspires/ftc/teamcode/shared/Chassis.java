@@ -108,11 +108,11 @@ public class Chassis {
     }
 
     public void stringIn() {
-        stringPuller.setPower(.25);
+        stringPuller.setPower(.75);
     }
 
     public void stringOut() {
-        stringPuller.setPower(-.25);
+        stringPuller.setPower(-.75);
     }
 
     public void stringZero() {
