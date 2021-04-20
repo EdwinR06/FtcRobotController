@@ -51,8 +51,6 @@ public class ClassTeleOp extends OpMode {
     double drive;
     double turn;
 
-    //Push failed
-
 
     @Override
     public void init() {
