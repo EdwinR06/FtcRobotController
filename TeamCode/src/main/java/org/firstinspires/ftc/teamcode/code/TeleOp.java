@@ -100,7 +100,7 @@ public class TeleOp extends OpMode {
         drive = gamepad1.left_stick_y;
         turn = gamepad1.right_stick_x;
 
-        //Ready
+        //Ready g
 
     /*frontLeftMotor.setPower(drive + strafe + turn);
     backLeftMotor.setPower(drive - strafe + turn);
