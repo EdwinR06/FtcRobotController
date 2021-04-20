@@ -38,9 +38,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /**
  * Demonstrates empty OpMode
  */
-@TeleOp(name = "Test: TeleOp")
+@TeleOp(name = "TeleOp")
 //@Disabled
-public class TeleOp extends OpMode {
+public class ClassTeleOp extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     private DcMotor frontLeftMotor;
