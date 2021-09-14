@@ -2,13 +2,13 @@ package org.firstinspires.ftc.teamcode.shared;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class DriveWheel {
+public class Motor {
     private static final double ticksPerRotation = 537.7;
     public static final double WHEEL_CIRCUMFERENCE = 12.3684816931;
     private DcMotor dcMotor;
     private String deviceName;
 
-    public DriveWheel(String deviceName, DcMotor.Direction direction) {
+    public Motor(String deviceName, DcMotor.Direction direction) {
         this.deviceName = deviceName;
         dcMotor = FTCUtil.hardwareMap.get(DcMotor.class, deviceName);
         dcMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

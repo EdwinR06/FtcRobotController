@@ -38,28 +38,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /**
  * Demonstrates empty OpMode
  */
-@TeleOp(name = "Test: TeleOp")
+@TeleOp(name = "Robotics TeleOp")
 //@Disabled
 public class TestTeleOp extends OpMode {
   private ElapsedTime runtime = new ElapsedTime();
-
-  private DcMotor frontLeftMotor;
-  private DcMotor frontRightMotor;
-  private DcMotor backLeftMotor;
-  private DcMotor backRightMotor;
-  private DcMotor intakeMotor;
-  private DcMotor liftMotor;
   private Chassis chassis;
 
   double drive;
   double strafe;
   double turn;
-  double intake;
-  double output;
-  boolean lift;
-  boolean downLift;
-  boolean stringIn;
-  boolean stringOut;
 
 
   @Override
@@ -97,38 +84,9 @@ public class TestTeleOp extends OpMode {
     drive = -gamepad1.left_stick_y;
     strafe = -gamepad1.left_stick_x;
     turn = gamepad1.right_stick_x;
-    intake = gamepad2.right_trigger;
-    output = gamepad2.left_trigger;
-    lift = gamepad2.y;
-    downLift = gamepad2.x;
-    stringOut = gamepad1.right_bumper;
-    stringIn = gamepad1.left_bumper;
+
 
     chassis.drive(drive, turn, strafe);
-    chassis.intake(intake);
-    chassis.deposit(output);
 
-
-
-    /*frontLeftMotor.setPower(drive + strafe + turn);
-    backLeftMotor.setPower(drive - strafe + turn);
-    frontRightMotor.setPower(drive - strafe - turn);
-    backRightMotor.setPower(drive + strafe - turn);
-    //intakeMotor.setPower(intake + output);*/
-    //New reset
-
-    if (lift) {
-      chassis.lift();
-    } else if (downLift) {
-      chassis.downLift();
-    }
-
-    if (stringIn) {
-      chassis.stringIn();
-    } else if (stringOut) {
-      chassis.stringOut();
-    } else {
-      chassis.stringZero();
-    }
   }
 }

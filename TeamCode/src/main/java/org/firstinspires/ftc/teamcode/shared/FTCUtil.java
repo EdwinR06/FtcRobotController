@@ -10,7 +10,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class FTCUtil {
     public static HardwareMap hardwareMap;
     public static Telemetry telemetry;
-    public static GridLogger gridLogger;
     private static OpMode opMode;
     private static LinearOpMode linearOpMode;
 

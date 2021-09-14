@@ -1,29 +1,21 @@
 package org.firstinspires.ftc.teamcode.shared;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 
 //Runs Completed
 public class Chassis {
-    private DriveWheel frontLeft;
-    private DriveWheel frontRight;
-    private DriveWheel backLeft;
-    private DriveWheel backRight;
-    private DriveWheel intakeMotor;
-    private DriveWheel liftMotor;
-    private DriveWheel stringPuller;
+    private Motor frontLeft;
+    private Motor frontRight;
+    private Motor backLeft;
+    private Motor backRight;
     private static final double LOOK_AHEAD_DISTANCE = 12;
 
     public Chassis() {
         //FTCUtil.telemetry.addData("Status", "Initialized");
-        frontLeft = new DriveWheel("frontLeftMotor", DcMotor.Direction.REVERSE);
-        frontRight = new DriveWheel("frontRightMotor", DcMotor.Direction.FORWARD);
-        backLeft = new DriveWheel( "backLeftMotor", DcMotor.Direction.REVERSE);
-        backRight = new DriveWheel( "backRightMotor", DcMotor.Direction.FORWARD);
-        intakeMotor = new DriveWheel("intakeMotor", DcMotor.Direction.FORWARD);
-        liftMotor = new DriveWheel("liftMotor", DcMotor.Direction.FORWARD);
-        stringPuller = new DriveWheel("stringPullerMotor", DcMotor.Direction.FORWARD);
+        frontLeft = new Motor("frontLeftMotor", DcMotor.Direction.REVERSE);
+        frontRight = new Motor("frontRightMotor", DcMotor.Direction.FORWARD);
+        backLeft = new Motor( "backLeftMotor", DcMotor.Direction.REVERSE);
+        backRight = new Motor( "backRightMotor", DcMotor.Direction.FORWARD);
     }
 
     private void stopMotors() {
@@ -78,56 +70,4 @@ public class Chassis {
         frontRight.setPower(straight - strafe - turn);
         backRight.setPower(straight + strafe - turn);
     }
-
-    public void intake(double power) {
-        intakeMotor.setPower(power);
-    }
-
-    public void deposit(double power) {
-        intakeMotor.setPower(-power);
-    }
-
-    /*public void lift(){
-        liftMotor.resetEncoder();
-        liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        int liftDistance = 25;
-
-        liftMotor.setPower(.4);
-        while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.isOpModeActive()) {
-        }
-        liftMotor.setPower(0);
-        //liftMotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
-    }*/
-
-    public void lift() {
-        liftMotor.setPower(.6);
-    }
-
-    public void downLift() {
-        liftMotor.setPower(-.3);
-    }
-
-    public void stringIn() {
-        stringPuller.setPower(.75);
-    }
-
-    public void stringOut() {
-        stringPuller.setPower(-.75);
-    }
-
-    public void stringZero() {
-        stringPuller.setPower(0);
-    }
-
-    /*public void downLift(){
-        liftMotor.resetEncoder();
-        liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        int liftDistance = 25;
-
-        liftMotor.setPower(-(.25));
-        while(Math.abs(liftMotor.getDistance()) < Math.abs(liftDistance) && FTCUtil.isOpModeActive()) {
-        }
-        liftMotor.setPower(0);
-
-    }*/
 }
