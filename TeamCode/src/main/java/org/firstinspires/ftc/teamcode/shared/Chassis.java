@@ -64,10 +64,10 @@ public class Chassis {
         stopMotors();
     }
 
-    public void drive(double straight, double turn, double strafe) {
-        frontLeft.setPower(straight + strafe + turn);
-        backLeft.setPower(straight - strafe + turn);
-        frontRight.setPower(straight - strafe - turn);
-        backRight.setPower(straight + strafe - turn);
+    public void drive(double drive, double turn, double strafe) {
+        frontLeft.setPower(drive + strafe + turn);
+        backLeft.setPower(drive - strafe + turn);
+        frontRight.setPower(drive - strafe - turn);
+        backRight.setPower(drive + strafe - turn);
     }
 }

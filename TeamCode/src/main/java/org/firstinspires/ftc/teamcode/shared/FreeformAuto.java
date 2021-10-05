@@ -49,7 +49,7 @@ public class FreeformAuto extends LinearOpMode {
         Chassis chassis = robot.getChassis();
 
         waitForStart();
-        chassis.drive(.5, 0, 0);
+        chassis.driveStraight(12, .5);
         //chassis.strafe(4, .5, true);
         //chassis.downLift();
 
