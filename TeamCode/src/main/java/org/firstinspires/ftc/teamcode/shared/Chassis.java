@@ -34,18 +34,22 @@ public class Chassis {
 
     public void driveStraight(double distance, double power) {
         frontLeft.resetEncoder();
+        backRight.resetEncoder();
         frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         setPowers(power);
 
-        while (Math.abs(frontLeft.getDistance()) < Math.abs(distance) && FTCUtil.isOpModeActive()) {
+        while ((Math.abs(frontLeft.getDistance()) + (Math.abs(backRight.getDistance()))/2) < Math.abs(distance) && FTCUtil.isOpModeActive()) {
         }
         stopMotors();
     }
 
     public void strafe(double distance, double power, boolean directionLeft) {
         frontLeft.resetEncoder();
+        backRight.resetEncoder();
         frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         if (directionLeft) {
             frontLeft.setPower(power);
@@ -59,8 +63,7 @@ public class Chassis {
             backRight.setPower(-power);
         }
 
-        while(Math.abs(frontLeft.getDistance()) < Math.abs(distance) && FTCUtil.isOpModeActive()){
-        }
+        while((Math.abs(frontLeft.getDistance()) + (Math.abs(backRight.getDistance()))/2) < Math.abs(distance) && FTCUtil.isOpModeActive()){}
         stopMotors();
     }
 
