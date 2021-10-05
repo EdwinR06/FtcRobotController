@@ -40,7 +40,7 @@ public class Chassis {
 
         setPowers(power);
 
-        while ((Math.abs(frontLeft.getDistance()) + (Math.abs(backRight.getDistance()))/2) < Math.abs(distance) && FTCUtil.isOpModeActive()) {
+        while (((Math.abs(frontLeft.getDistance()) + (Math.abs(backRight.getDistance())))/2) < Math.abs(distance) && FTCUtil.isOpModeActive()) {
         }
         stopMotors();
     }
