@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Motor {
     private static final double ticksPerRotation = 537.6;
-    public static final double WHEEL_CIRCUMFERENCE = 11.873743682;
+    public static final double WHEEL_CIRCUMFERENCE = 3.77953 * Math.PI;
     private DcMotor dcMotor;
     private String deviceName;
 

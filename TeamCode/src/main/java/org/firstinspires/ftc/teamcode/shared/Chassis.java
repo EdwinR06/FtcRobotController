@@ -42,7 +42,7 @@ public class Chassis {
 
         setPowers(power);
 
-        while (Math.abs(frontLeft.getDistance()) + Math.abs(backRight.getDistance()) / 2 < Math.abs(distance) && FTCUtil.isOpModeActive()) {
+        while (Math.abs(frontLeft.getDistance()) < Math.abs(distance) && Math.abs(backRight.getDistance()) < Math.abs(distance) && FTCUtil.isOpModeActive()) {
             telemetry.addData("Encoder value", frontLeft.getDistance());
             telemetry.addData("Encoder value", backRight.getDistance());
 
