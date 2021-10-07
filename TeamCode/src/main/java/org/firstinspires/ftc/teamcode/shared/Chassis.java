@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.shared;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 //Runs Completed
 public class Chassis {
     private Motor frontLeft;
@@ -32,7 +34,7 @@ public class Chassis {
         backRight.setPower(motorPower);
     }
 
-    public void driveStraight(double distance, double power) {
+    public void driveStraight(double distance, double power, Telemetry telemetry) {
         frontLeft.resetEncoder();
         backRight.resetEncoder();
         frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -41,6 +43,9 @@ public class Chassis {
         setPowers(power);
 
         while (Math.abs(frontLeft.getDistance()) + Math.abs(backRight.getDistance()) / 2 < Math.abs(distance) && FTCUtil.isOpModeActive()) {
+            telemetry.addData("Encoder value", frontLeft.getDistance());
+            telemetry.addData("Encoder value", backRight.getDistance());
+
         }
         stopMotors();
     }

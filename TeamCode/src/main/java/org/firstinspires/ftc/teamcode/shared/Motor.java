@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.shared;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Motor {
-    private static final double ticksPerRotation = 537.7;
-    public static final double WHEEL_CIRCUMFERENCE = 12.3684816931;
+    private static final double ticksPerRotation = 537.6;
+    public static final double WHEEL_CIRCUMFERENCE = 11.873743682;
     private DcMotor dcMotor;
     private String deviceName;
 
