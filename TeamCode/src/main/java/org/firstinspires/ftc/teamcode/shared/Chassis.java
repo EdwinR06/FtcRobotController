@@ -11,6 +11,14 @@ public class Chassis {
     private Motor backLeft;
     private Motor backRight;
     private static final double LOOK_AHEAD_DISTANCE = 12;
+    private double error;
+    private double integral;
+    private double derivative;
+    private double integralaCoef = 0.01;
+    private double correctionSum;
+    private double prop = 0.05;
+    private double previousError;
+    private double derivativeCoef = ;
 
     public Chassis() {
         //FTCUtil.telemetry.addData("Status", "Initialized");
@@ -34,7 +42,7 @@ public class Chassis {
         backRight.setPower(motorPower);
     }
 
-    public void driveStraight(double distance, double power, Telemetry telemetry) {
+    public void driveStraight(double distance, double power) {
         frontLeft.resetEncoder();
         backRight.resetEncoder();
         frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -42,10 +50,24 @@ public class Chassis {
 
         setPowers(power);
 
-        while (Math.abs(frontLeft.getDistance()) < Math.abs(distance) && Math.abs(backRight.getDistance()) < Math.abs(distance) && FTCUtil.isOpModeActive()) {
-            telemetry.addData("Encoder value", frontLeft.getDistance());
-            telemetry.addData("Encoder value", backRight.getDistance());
+        while (Math.abs(frontLeft.getDistance()) < Math.abs(distance-1) && Math.abs(backRight.getDistance()) < Math.abs(distance-1) && FTCUtil.isOpModeActive()) {
+            error = Math.abs(frontLeft.getDistance()) - Math.abs(backRight.getDistance());
+            derivative = (previousError * error)
+            correctionSum += prop + derivative;
+            integral = correctionSum * integralaCoef;
 
+            if(error > 0 ){
+                frontLeft.setPower(power - prop);
+                backLeft.setPower(power  - prop);
+                frontRight.setPower(power);
+                backRight.setPower(power);
+            } else {
+                frontLeft.setPower(power);
+                backLeft.setPower(power);
+                frontRight.setPower(power - prop);
+                backRight.setPower(power - prop);
+            }
+            previousError = error;
         }
         stopMotors();
     }
