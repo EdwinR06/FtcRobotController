@@ -12,7 +12,7 @@ public class Chassis {
     private Motor backRight;
     private static final double LOOK_AHEAD_DISTANCE = 12;
     private double error;
-    private double prop = 0.05;
+    private double prop = 0.03;
     private double correction;
 
     public Chassis() {
