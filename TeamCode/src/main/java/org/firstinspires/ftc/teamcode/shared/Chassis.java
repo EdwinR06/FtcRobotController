@@ -12,13 +12,8 @@ public class Chassis {
     private Motor backRight;
     private static final double LOOK_AHEAD_DISTANCE = 12;
     private double error;
-    private double integral;
-    private double derivative;
-    private double integralaCoef = 0.01;
-    private double correctionSum;
     private double prop = 0.05;
-    private double previousError;
-    private double derivativeCoef = ;
+    private double correction;
 
     public Chassis() {
         //FTCUtil.telemetry.addData("Status", "Initialized");
@@ -52,22 +47,19 @@ public class Chassis {
 
         while (Math.abs(frontLeft.getDistance()) < Math.abs(distance-1) && Math.abs(backRight.getDistance()) < Math.abs(distance-1) && FTCUtil.isOpModeActive()) {
             error = Math.abs(frontLeft.getDistance()) - Math.abs(backRight.getDistance());
-            derivative = (previousError * error)
-            correctionSum += prop + derivative;
-            integral = correctionSum * integralaCoef;
+            correction = prop * error;
 
             if(error > 0 ){
-                frontLeft.setPower(power - prop);
-                backLeft.setPower(power  - prop);
+                frontLeft.setPower(power - correction);
+                backLeft.setPower(power  - correction);
                 frontRight.setPower(power);
                 backRight.setPower(power);
             } else {
                 frontLeft.setPower(power);
                 backLeft.setPower(power);
-                frontRight.setPower(power - prop);
-                backRight.setPower(power - prop);
+                frontRight.setPower(power - correction);
+                backRight.setPower(power - correction);
             }
-            previousError = error;
         }
         stopMotors();
     }
