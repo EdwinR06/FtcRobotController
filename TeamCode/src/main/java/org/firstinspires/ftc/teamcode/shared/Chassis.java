@@ -87,9 +87,9 @@ public class Chassis {
     }
 
     public void drive(double drive, double turn, double strafe) {
-        frontLeft.setPower(drive + strafe + turn);
-        backLeft.setPower(drive - strafe + turn);
-        frontRight.setPower(drive - strafe - turn);
-        backRight.setPower(drive + strafe - turn);
+        frontLeft.setPower(drive - strafe + turn);
+        backLeft.setPower(drive + strafe + turn);
+        frontRight.setPower(drive + strafe - turn);
+        backRight.setPower(drive - strafe - turn);
     }
 }
