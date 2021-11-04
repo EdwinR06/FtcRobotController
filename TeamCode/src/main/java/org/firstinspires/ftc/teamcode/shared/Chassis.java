@@ -1,8 +1,7 @@
 package org.firstinspires.ftc.teamcode.shared;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
+import com.qualcomm.robotcore.util.Range;
 
 //Runs Completed
 public class Chassis {
@@ -12,8 +11,16 @@ public class Chassis {
     private Motor backRight;
     private static final double LOOK_AHEAD_DISTANCE = 12;
     private double error;
-    private double prop = 0.03;
+    private double correctionSum;
+    private double propCoef = 0.03;
+    private double derCoef = 0.0000000000000000001;
+    private double intCoef = 0.0000000000000000001;
     private double correction;
+    private double previousError;
+    private double proportional;
+    private double derivative;
+    private double integral;
+    private double distanceRemaining;
 
     public Chassis() {
         //FTCUtil.telemetry.addData("Status", "Initialized");
@@ -47,22 +54,30 @@ public class Chassis {
 
         while (Math.abs(frontLeft.getDistance()) < Math.abs(distance-1) && Math.abs(backRight.getDistance()) < Math.abs(distance-1) && FTCUtil.isOpModeActive()) {
             error = Math.abs(frontLeft.getDistance()) - Math.abs(backRight.getDistance());
-            correction = prop * error;
+            proportional = propCoef * error;
+            derivative = derCoef * (error - previousError);
+            integral = correctionSum * intCoef;
+            correction = power + proportional + derivative + integral;
 
             if(error > 0 ){
-                frontLeft.setPower(power - correction);
-                backLeft.setPower(power  - correction);
-                frontRight.setPower(power);
-                backRight.setPower(power);
+                frontLeft.setPower(Range.clip(power - correction, -1.0, 1.0));
+                backLeft.setPower(Range.clip(power  - correction, -1.0, 1.0));
+                frontRight.setPower(Range.clip(power, -1.0, 1.0));
+                backRight.setPower(Range.clip(power, -1.0, 1.0));
             } else {
-                frontLeft.setPower(power);
-                backLeft.setPower(power);
-                frontRight.setPower(power - correction);
-                backRight.setPower(power - correction);
+                frontLeft.setPower(Range.clip(power, -1.0, 1.0));
+                backLeft.setPower(Range.clip(power, -1.0, 1.0));
+                frontRight.setPower(Range.clip(power - correction, -1.0, 1.0));
+                backRight.setPower(Range.clip(power - correction, -1.0, 1.0));
             }
+            previousError = error;
+            correctionSum += correction;
         }
+
         stopMotors();
     }
+
+
 
     public void strafe(double distance, double power, boolean directionLeft) {
         frontLeft.resetEncoder();
@@ -92,4 +107,5 @@ public class Chassis {
         frontRight.setPower(drive + strafe - turn);
         backRight.setPower(drive - strafe - turn);
     }
+
 }
