@@ -12,9 +12,9 @@ public class Chassis {
     private static final double LOOK_AHEAD_DISTANCE = 12;
     private double error;
     private double correctionSum;
-    private double propCoef = 0.03;
-    private double derCoef = 0.0000000000000000001;
-    private double intCoef = 0.0000000000000000001;
+    private double propCoef = 0.01;
+    private double derCoef = 0.000000000000000000000001;
+    private double intCoef = 0.000000000000000000000001;
     private double correction;
     private double previousError;
     private double proportional;
@@ -72,6 +72,24 @@ public class Chassis {
             }
             previousError = error;
             correctionSum += correction;
+        }
+
+        stopMotors();
+    }
+
+    private void turn(int degree, double distance, double power){
+        frontLeft.resetEncoder();
+        backRight.resetEncoder();
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        frontLeft.setPower(Range.clip((degree/15)*power, -1.0, 1.0));
+        backLeft.setPower(Range.clip((degree/15)*power, -1.0, 1.0));
+        backRight.setPower(Range.clip((degree/15)*-power, -1.0, 1.0));
+        frontRight.setPower(Range.clip((degree/15)*-power, -1.0, 1.0));
+
+        while (Math.abs(frontLeft.getDistance()) < Math.abs(distance-1) && Math.abs(backRight.getDistance()) < Math.abs(distance-1) && FTCUtil.isOpModeActive()){
         }
 
         stopMotors();

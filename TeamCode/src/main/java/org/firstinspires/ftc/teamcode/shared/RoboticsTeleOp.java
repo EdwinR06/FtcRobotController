@@ -38,9 +38,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /**
  * Demonstrates empty OpMode
  */
-@TeleOp(name = "Robotics TeleOp")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Robotics TeleOp")
 //@Disabled
-public class TestTeleOp extends OpMode {
+public class RoboticsTeleOp extends OpMode {
   private ElapsedTime runtime = new ElapsedTime();
   private Chassis chassis;
 
