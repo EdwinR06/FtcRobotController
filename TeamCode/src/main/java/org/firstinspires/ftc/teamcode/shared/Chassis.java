@@ -21,6 +21,7 @@ public class Chassis {
     private double derivative;
     private double integral;
     private double distanceRemaining;
+    private double distanceTurn;
 
     public Chassis() {
         //FTCUtil.telemetry.addData("Status", "Initialized");
@@ -77,19 +78,21 @@ public class Chassis {
         stopMotors();
     }
 
-    private void turn(int degree, double distance, double power){
+    public void turn(int degree, double power){
         frontLeft.resetEncoder();
         backRight.resetEncoder();
 
         frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        frontLeft.setPower(Range.clip((degree/15)*power, -1.0, 1.0));
-        backLeft.setPower(Range.clip((degree/15)*power, -1.0, 1.0));
-        backRight.setPower(Range.clip((degree/15)*-power, -1.0, 1.0));
-        frontRight.setPower(Range.clip((degree/15)*-power, -1.0, 1.0));
+        frontLeft.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(-power);
+        frontRight.setPower(-power);
 
-        while (Math.abs(frontLeft.getDistance()) < Math.abs(distance-1) && Math.abs(backRight.getDistance()) < Math.abs(distance-1) && FTCUtil.isOpModeActive()){
+        distanceTurn = degree / 15;
+
+        while (Math.abs(frontLeft.getDistance()) < Math.abs(distanceTurn-1) && Math.abs(backRight.getDistance()) < Math.abs(distanceTurn-1) && FTCUtil.isOpModeActive()){
         }
 
         stopMotors();
