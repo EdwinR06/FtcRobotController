@@ -31,8 +31,6 @@ package org.firstinspires.ftc.teamcode.shared;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * Freeform Auto Op Mode
@@ -50,7 +48,7 @@ public class FreeformAuto extends LinearOpMode {
 
         waitForStart();
         //chassis.driveStraight(25, .5);
-        chassis.turn(45, .5);
+        chassis.turnAuto(45, .5);
         //chassis.strafe(4, .5, true);
         //chassis.downLift();
         sleep(1000);

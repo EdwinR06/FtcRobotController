@@ -78,7 +78,8 @@ public class Chassis {
         stopMotors();
     }
 
-    public void turn(int degree, double power){
+    // Positive degree = right turn, negative degree = left turn
+    public void turnAuto(int degree, double power){
         frontLeft.resetEncoder();
         backRight.resetEncoder();
 
@@ -92,7 +93,7 @@ public class Chassis {
 
         distanceTurn = degree / 15;
 
-        while (Math.abs(frontLeft.getDistance()) < Math.abs(distanceTurn-1) && Math.abs(backRight.getDistance()) < Math.abs(distanceTurn-1) && FTCUtil.isOpModeActive()){
+        while (Math.abs(frontLeft.getDistance()) < Math.abs(distanceTurn) && Math.abs(backRight.getDistance()) < Math.abs(distanceTurn) && FTCUtil.isOpModeActive()){
         }
 
         stopMotors();
