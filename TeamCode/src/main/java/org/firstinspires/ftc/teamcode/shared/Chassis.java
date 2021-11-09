@@ -22,6 +22,7 @@ public class Chassis {
     private double integral;
     private double distanceRemaining;
     private double distanceTurn;
+    private double baseRad;
 
     public Chassis() {
         //FTCUtil.telemetry.addData("Status", "Initialized");
@@ -91,7 +92,7 @@ public class Chassis {
         backRight.setPower(-power);
         frontRight.setPower(-power);
 
-        distanceTurn = degree / 15;
+        distanceTurn = (degree / 360) * baseRad * Math.PI;
 
         while (Math.abs(frontLeft.getDistance()) < Math.abs(distanceTurn) && Math.abs(backRight.getDistance()) < Math.abs(distanceTurn) && FTCUtil.isOpModeActive()){
         }
