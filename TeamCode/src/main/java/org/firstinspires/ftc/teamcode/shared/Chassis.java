@@ -22,7 +22,7 @@ public class Chassis {
     private double integral;
     private double distanceRemaining;
     private double distanceTurn;
-    private double baseRad = (Math.sqrt(Math.pow(17.8, 2.0) + Math.pow(17.0, 2.0)))/2;
+    private double baseRad = 24.6138172578;
 
     public Chassis() {
         //FTCUtil.telemetry.addData("Status", "Initialized");

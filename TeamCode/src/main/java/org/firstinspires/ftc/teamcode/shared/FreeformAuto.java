@@ -48,7 +48,7 @@ public class FreeformAuto extends LinearOpMode {
 
         waitForStart();
         //chassis.driveStraight(25, .5);
-        chassis.turnAuto(45, .5);
+        chassis.turnAuto(90, .5);
         //chassis.strafe(4, .5, true);
         //chassis.downLift();
         sleep(1000);
