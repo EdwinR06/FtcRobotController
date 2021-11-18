@@ -22,7 +22,7 @@ public class Chassis {
     private double integral;
     private double distanceRemaining;
     private double distanceTurn;
-    private double baseRad = 24.6138172578;
+    private double baseRad = 24.6138172578/2;
 
     public Chassis() {
         //FTCUtil.telemetry.addData("Status", "Initialized");
@@ -61,19 +61,38 @@ public class Chassis {
             integral = correctionSum * intCoef;
             correction = power + proportional + derivative + integral;
 
-            if(error > 0 ){
-                frontLeft.setPower(Range.clip(power - correction, -1.0, 1.0));
-                backLeft.setPower(Range.clip(power  - correction, -1.0, 1.0));
-                frontRight.setPower(Range.clip(power, -1.0, 1.0));
-                backRight.setPower(Range.clip(power, -1.0, 1.0));
+            if(((frontLeft.getDistance()) + (backRight.getDistance()))/2 >= (Math.abs(distance))*0.9){
+
+                if(error > 0 ){
+                    frontLeft.setPower(Range.clip(correction, -1.0, 1.0));
+                    backLeft.setPower(Range.clip(correction, -1.0, 1.0));
+                    frontRight.setPower(Range.clip(power, -1.0, 1.0));
+                    backRight.setPower(Range.clip(power, -1.0, 1.0));
+                } else {
+                    frontLeft.setPower(Range.clip(power, -1.0, 1.0));
+                    backLeft.setPower(Range.clip(power, -1.0, 1.0));
+                    frontRight.setPower(Range.clip(correction, -1.0, 1.0));
+                    backRight.setPower(Range.clip(correction, -1.0, 1.0));
+                }
+                previousError = error;
+                correctionSum += correction;
             } else {
-                frontLeft.setPower(Range.clip(power, -1.0, 1.0));
-                backLeft.setPower(Range.clip(power, -1.0, 1.0));
-                frontRight.setPower(Range.clip(power - correction, -1.0, 1.0));
-                backRight.setPower(Range.clip(power - correction, -1.0, 1.0));
+
+                if(error > 0 ){
+                    frontLeft.setPower(Range.clip(correction, -1.0, 1.0));
+                    backLeft.setPower(Range.clip(correction, -1.0, 1.0));
+                    frontRight.setPower(Range.clip(power, -1.0, 1.0));
+                    backRight.setPower(Range.clip(power, -1.0, 1.0));
+                } else {
+                    frontLeft.setPower(Range.clip(power, -1.0, 1.0));
+                    backLeft.setPower(Range.clip(power, -1.0, 1.0));
+                    frontRight.setPower(Range.clip(correction, -1.0, 1.0));
+                    backRight.setPower(Range.clip(correction, -1.0, 1.0));
+                }
+                previousError = error;
+                correctionSum += correction;
             }
-            previousError = error;
-            correctionSum += correction;
+
         }
 
         stopMotors();
