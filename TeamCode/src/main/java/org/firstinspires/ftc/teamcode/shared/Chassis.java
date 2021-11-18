@@ -9,20 +9,19 @@ public class Chassis {
     private Motor frontRight;
     private Motor backLeft;
     private Motor backRight;
-    private static final double LOOK_AHEAD_DISTANCE = 12;
     private double error;
     private double correctionSum;
-    private double propCoef = 0.01;
-    private double derCoef = 0.000000000000000000000001;
-    private double intCoef = 0.000000000000000000000001;
+    private final double propCoef = 0.01;
+    private final double derCoef = 0.000000000000000000000001;
+    private final double intCoef = 0.000000000000000000000001;
     private double correction;
     private double previousError;
     private double proportional;
     private double derivative;
     private double integral;
-    private double distanceRemaining;
     private double distanceTurn;
-    private double baseRad = 24.6138172578/2;
+    private final double baseRad = 24.6138172578/2;
+    private double correctionTotal;
 
     public Chassis() {
         //FTCUtil.telemetry.addData("Status", "Initialized");
@@ -46,6 +45,18 @@ public class Chassis {
         backRight.setPower(motorPower);
     }
 
+    public double correction(double error, double previousError, double power, double correctionSum){
+        proportional = propCoef * error;
+        derivative = derCoef * (error - previousError);
+        integral = correctionSum * intCoef;
+        if(power < .95 && power > -.95){
+            correction = power + proportional + derivative + integral;
+        } else {
+            correction = power - proportional - derivative - integral;
+        }
+        return correction;
+    }
+
     public void driveStraight(double distance, double power) {
         frontLeft.resetEncoder();
         backRight.resetEncoder();
@@ -56,41 +67,39 @@ public class Chassis {
 
         while (Math.abs(frontLeft.getDistance()) < Math.abs(distance-1) && Math.abs(backRight.getDistance()) < Math.abs(distance-1) && FTCUtil.isOpModeActive()) {
             error = Math.abs(frontLeft.getDistance()) - Math.abs(backRight.getDistance());
-            proportional = propCoef * error;
-            derivative = derCoef * (error - previousError);
-            integral = correctionSum * intCoef;
-            correction = power + proportional + derivative + integral;
+
+            correctionTotal = correction(error, previousError, power, correctionSum);
 
             if(((frontLeft.getDistance()) + (backRight.getDistance()))/2 >= (Math.abs(distance))*0.9){
 
                 if(error > 0 ){
-                    frontLeft.setPower(Range.clip(correction, -1.0, 1.0));
-                    backLeft.setPower(Range.clip(correction, -1.0, 1.0));
-                    frontRight.setPower(Range.clip(power, -1.0, 1.0));
-                    backRight.setPower(Range.clip(power, -1.0, 1.0));
+                    frontLeft.setPower(Range.clip(correctionTotal*.9, -1.0, 1.0));
+                    backLeft.setPower(Range.clip(correctionTotal*.9, -1.0, 1.0));
+                    frontRight.setPower(Range.clip(power*.9, -1.0, 1.0));
+                    backRight.setPower(Range.clip(power*.9, -1.0, 1.0));
                 } else {
-                    frontLeft.setPower(Range.clip(power, -1.0, 1.0));
-                    backLeft.setPower(Range.clip(power, -1.0, 1.0));
-                    frontRight.setPower(Range.clip(correction, -1.0, 1.0));
-                    backRight.setPower(Range.clip(correction, -1.0, 1.0));
+                    frontLeft.setPower(Range.clip(power*9, -1.0, 1.0));
+                    backLeft.setPower(Range.clip(power*.9, -1.0, 1.0));
+                    frontRight.setPower(Range.clip(correctionTotal*.9, -1.0, 1.0));
+                    backRight.setPower(Range.clip(correctionTotal*.9, -1.0, 1.0));
                 }
                 previousError = error;
-                correctionSum += correction;
+                correctionSum += correctionTotal;
             } else {
 
                 if(error > 0 ){
-                    frontLeft.setPower(Range.clip(correction, -1.0, 1.0));
-                    backLeft.setPower(Range.clip(correction, -1.0, 1.0));
+                    frontLeft.setPower(Range.clip(correctionSum, -1.0, 1.0));
+                    backLeft.setPower(Range.clip(correctionSum, -1.0, 1.0));
                     frontRight.setPower(Range.clip(power, -1.0, 1.0));
                     backRight.setPower(Range.clip(power, -1.0, 1.0));
                 } else {
                     frontLeft.setPower(Range.clip(power, -1.0, 1.0));
                     backLeft.setPower(Range.clip(power, -1.0, 1.0));
-                    frontRight.setPower(Range.clip(correction, -1.0, 1.0));
-                    backRight.setPower(Range.clip(correction, -1.0, 1.0));
+                    frontRight.setPower(Range.clip(correctionSum, -1.0, 1.0));
+                    backRight.setPower(Range.clip(correctionSum, -1.0, 1.0));
                 }
                 previousError = error;
-                correctionSum += correction;
+                correctionSum += correctionSum;
             }
 
         }
@@ -99,7 +108,7 @@ public class Chassis {
     }
 
     // Positive degree = right turn, negative degree = left turn
-    public void turnAuto(int degree, double power){
+    public void turnAuto(double degree, double power){
         frontLeft.resetEncoder();
         backRight.resetEncoder();
 
@@ -111,35 +120,11 @@ public class Chassis {
         backRight.setPower(-power);
         frontRight.setPower(-power);
 
-        distanceTurn = (degree / 360) * baseRad * Math.PI;
+        distanceTurn = (degree / 360.0) * baseRad * Math.PI;
 
         while (Math.abs(frontLeft.getDistance()) < Math.abs(distanceTurn) && Math.abs(backRight.getDistance()) < Math.abs(distanceTurn) && FTCUtil.isOpModeActive()){
         }
 
-        stopMotors();
-    }
-
-
-
-    public void strafe(double distance, double power, boolean directionLeft) {
-        frontLeft.resetEncoder();
-        backRight.resetEncoder();
-        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        if (directionLeft) {
-            frontLeft.setPower(power);
-            backRight.setPower(power);
-            frontRight.setPower(-power);
-            backLeft.setPower(-power);
-        } else {
-            frontRight.setPower(power);
-            backLeft.setPower(power);
-            frontLeft.setPower(-power);
-            backRight.setPower(-power);
-        }
-
-        while((Math.abs(frontLeft.getDistance()) + (Math.abs(backRight.getDistance()))/2) < Math.abs(distance) && FTCUtil.isOpModeActive()){}
         stopMotors();
     }
 
