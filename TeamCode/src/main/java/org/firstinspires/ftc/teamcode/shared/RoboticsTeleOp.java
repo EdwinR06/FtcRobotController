@@ -42,7 +42,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 //@Disabled
 public class RoboticsTeleOp extends OpMode {
   private ElapsedTime runtime = new ElapsedTime();
-  private Chassis chassis;
+  private Robot robot;
 
   double drive;
   double strafe;
@@ -52,8 +52,7 @@ public class RoboticsTeleOp extends OpMode {
   @Override
   public void init() {
     FTCUtil.setOpMode(this);
-
-    chassis = new Chassis();
+    robot = new Robot(telemetry);
   }
 
   /*
@@ -86,7 +85,7 @@ public class RoboticsTeleOp extends OpMode {
     turn = gamepad1.right_stick_x;
 
 
-    chassis.drive(drive, turn, strafe);
+    robot.drive(drive, turn, strafe);
 
   }
 }

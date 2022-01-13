@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.shared;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 //Runs Completed
 public class Chassis {
     private Motor frontLeft;
@@ -22,13 +24,15 @@ public class Chassis {
     private double distanceTurn;
     private final double baseRad = 24.6138172578/2;
     private double correctionTotal;
+    private Telemetry telemetry;
 
-    public Chassis() {
+    public Chassis(Telemetry telemetry) {
         //FTCUtil.telemetry.addData("Status", "Initialized");
         frontLeft = new Motor("frontLeftMotor", DcMotor.Direction.REVERSE);
         frontRight = new Motor("frontRightMotor", DcMotor.Direction.FORWARD);
         backLeft = new Motor( "backLeftMotor", DcMotor.Direction.REVERSE);
         backRight = new Motor( "backRightMotor", DcMotor.Direction.FORWARD);
+        this.telemetry = telemetry;
     }
 
     private void stopMotors() {

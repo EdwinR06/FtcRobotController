@@ -43,12 +43,11 @@ public class FreeformAuto extends LinearOpMode {
     @Override
     public void runOpMode() {
         FTCUtil.setOpMode(this);
-        robot = new Robot();
-        Chassis chassis = robot.getChassis();
+        robot = new Robot(telemetry);
 
         waitForStart();
         //chassis.driveStraight(25, .5);
-        chassis.turnAuto(90, .5);
+        robot.turnAuto(90, .5);
         //chassis.strafe(4, .5, true);
         //chassis.downLift();
         sleep(1000);
