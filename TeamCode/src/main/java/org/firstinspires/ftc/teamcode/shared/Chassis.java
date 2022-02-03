@@ -1,142 +1,89 @@
 package org.firstinspires.ftc.teamcode.shared;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-//Runs Completed
 public class Chassis {
-    private Motor frontLeft;
-    private Motor frontRight;
-    private Motor backLeft;
-    private Motor backRight;
-    private double error;
-    private double correctionSum;
-    private final double propCoef = 0.01;
-    private final double derCoef = 0.000000000000000000000001;
-    private final double intCoef = 0.000000000000000000000001;
-    private double correction;
-    private double previousError;
-    private double proportional;
-    private double derivative;
-    private double integral;
-    private double distanceTurn;
-    private final double baseRad = 24.6138172578/2;
-    private double correctionTotal;
+    private DcMotor leftFront = null;
+    private DcMotor leftRear = null;
+    private DcMotor rightFront = null;
+    private DcMotor rightRear = null;
+    private HardwareMap hardwareMap;
     private Telemetry telemetry;
+    private static final double TICKS_PER_INCH=39.6;
+    private double baseDi = 32.5;//24.6138172578;
 
-    public Chassis(Telemetry telemetry) {
-        //FTCUtil.telemetry.addData("Status", "Initialized");
-        frontLeft = new Motor("frontLeftMotor", DcMotor.Direction.REVERSE);
-        frontRight = new Motor("frontRightMotor", DcMotor.Direction.FORWARD);
-        backLeft = new Motor( "backLeftMotor", DcMotor.Direction.REVERSE);
-        backRight = new Motor( "backRightMotor", DcMotor.Direction.FORWARD);
+
+    public Chassis(HardwareMap hardwareMap, Telemetry telemetry) {
+        this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
+
+        leftFront = hardwareMap.get(DcMotor.class, "front_left_motor");
+        leftRear = hardwareMap.get(DcMotor.class, "back_left_motor");
+        rightFront = hardwareMap.get(DcMotor.class, "front_right_motor");
+        rightRear = hardwareMap.get(DcMotor.class, "back_right_motor");
+
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
+        leftRear.setDirection(DcMotor.Direction.REVERSE);
+        rightFront.setDirection(DcMotor.Direction.FORWARD);
+        rightRear.setDirection(DcMotor.Direction.FORWARD);
     }
 
-    private void stopMotors() {
-        frontRight.setPower(0);
-        frontLeft.setPower(0);
-        backRight.setPower(0);
-        backLeft.setPower(0);
-    }
+    void driveStraight(double distance){
 
-    public void setPowers(double motorPower){
-        frontLeft.setPower(motorPower);
-        frontRight.setPower(motorPower);
-        backLeft.setPower(motorPower);
-        backRight.setPower(motorPower);
-    }
-
-    public double correction(double error, double previousError, double power, double correctionSum){
-        proportional = propCoef * error;
-        derivative = derCoef * (error - previousError);
-        integral = correctionSum * intCoef;
-        if(power < .95 && power > -.95){
-            correction = power + proportional + derivative + integral;
+        double ticksToRun=Math.abs(distance)*TICKS_PER_INCH;
+        int ticksSoFar = 0;
+        int startPos=leftFront.getCurrentPosition();
+        if (distance<0) {
+            leftFront.setPower(-0.2);
+            leftRear.setPower(-0.2);
+            rightFront.setPower(-0.2);
+            rightRear.setPower(-0.2);
         } else {
-            correction = power - proportional - derivative - integral;
+            leftFront.setPower(0.2);
+            leftRear.setPower(0.2);
+            rightFront.setPower(0.2);
+            rightRear.setPower(0.2);
         }
-        return correction;
+        while (ticksSoFar<ticksToRun){
+            ticksSoFar = Math.abs(leftFront.getCurrentPosition() - startPos);
+        }
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
+
     }
 
-    public void driveStraight(double distance, double power) {
-        frontLeft.resetEncoder();
-        backRight.resetEncoder();
-        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        setPowers(power);
-
-        while (Math.abs(frontLeft.getDistance()) < Math.abs(distance-1) && Math.abs(backRight.getDistance()) < Math.abs(distance-1) && FTCUtil.isOpModeActive()) {
-            error = Math.abs(frontLeft.getDistance()) - Math.abs(backRight.getDistance());
-
-            correctionTotal = correction(error, previousError, power, correctionSum);
-
-            if(((frontLeft.getDistance()) + (backRight.getDistance()))/2 >= (Math.abs(distance))*0.9){
-
-                if(error > 0 ){
-                    frontLeft.setPower(Range.clip(correctionTotal*.9, -1.0, 1.0));
-                    backLeft.setPower(Range.clip(correctionTotal*.9, -1.0, 1.0));
-                    frontRight.setPower(Range.clip(power*.9, -1.0, 1.0));
-                    backRight.setPower(Range.clip(power*.9, -1.0, 1.0));
-                } else {
-                    frontLeft.setPower(Range.clip(power*9, -1.0, 1.0));
-                    backLeft.setPower(Range.clip(power*.9, -1.0, 1.0));
-                    frontRight.setPower(Range.clip(correctionTotal*.9, -1.0, 1.0));
-                    backRight.setPower(Range.clip(correctionTotal*.9, -1.0, 1.0));
-                }
-                previousError = error;
-                correctionSum += correctionTotal;
-            } else {
-
-                if(error > 0 ){
-                    frontLeft.setPower(Range.clip(correctionSum, -1.0, 1.0));
-                    backLeft.setPower(Range.clip(correctionSum, -1.0, 1.0));
-                    frontRight.setPower(Range.clip(power, -1.0, 1.0));
-                    backRight.setPower(Range.clip(power, -1.0, 1.0));
-                } else {
-                    frontLeft.setPower(Range.clip(power, -1.0, 1.0));
-                    backLeft.setPower(Range.clip(power, -1.0, 1.0));
-                    frontRight.setPower(Range.clip(correctionSum, -1.0, 1.0));
-                    backRight.setPower(Range.clip(correctionSum, -1.0, 1.0));
-                }
-                previousError = error;
-                correctionSum += correctionSum;
-            }
-
+    void pointTurn(double angle,boolean rightTurn) {
+        double turnDistance = (angle/360.0)*baseDi*Math.PI;
+        double TicksSoFar = 0;
+        double TickstoRun = turnDistance*TICKS_PER_INCH;
+        int startPos=leftFront.getCurrentPosition();
+        double power = 0.25;
+        if (!rightTurn){
+            power=-power;
         }
-
-        stopMotors();
+        leftFront.setPower(power);
+        leftRear.setPower(power);
+        rightFront.setPower(-power);
+        rightRear.setPower(-power);
+        while (TicksSoFar<TickstoRun){
+            TicksSoFar = Math.abs(leftFront.getCurrentPosition()-startPos);
+        }
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
     }
 
-    // Positive degree = right turn, negative degree = left turn
-    public void turnAuto(double degree, double power){
-        frontLeft.resetEncoder();
-        backRight.resetEncoder();
-
-        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        frontLeft.setPower(power);
-        backLeft.setPower(power);
-        backRight.setPower(-power);
-        frontRight.setPower(-power);
-
-        distanceTurn = (degree / 360.0) * baseRad * Math.PI;
-
-        while (Math.abs(frontLeft.getDistance()) < Math.abs(distanceTurn) && Math.abs(backRight.getDistance()) < Math.abs(distanceTurn) && FTCUtil.isOpModeActive()){
-        }
-
-        stopMotors();
-    }
-
-    public void drive(double drive, double turn, double strafe) {
-        frontLeft.setPower(drive - strafe + turn);
-        backLeft.setPower(drive + strafe + turn);
-        frontRight.setPower(drive + strafe - turn);
-        backRight.setPower(drive - strafe - turn);
+    void drive(double drive, double turn, double strafe) {
+        leftFront.setPower(drive + strafe + turn);
+        leftRear.setPower(drive - strafe + turn);
+        rightFront.setPower(drive - strafe - turn);
+        rightRear.setPower(drive + strafe - turn);
     }
 
 }

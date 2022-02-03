@@ -27,62 +27,51 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.code;
+package org.firstinspires.ftc.teamcode.shared;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * Demonstrates empty OpMode
+ * This file contains an example of an iterative (Non-Linear) "OpMode".
+ * An OpMode is a 'program' that runs in either the autonomous or the teleop period of an FTC match.
+ * The names of OpModes appear on the menu of the FTC Driver Station.
+ * When an selection is made from the menu, the corresponding OpMode
+ * class is instantiated on the Robot Controller and executed.
+ *
+ * This particular OpMode just executes a basic Tank Drive Teleop for a four wheeled robot
+ * It includes all the skeletal structure that all iterative OpModes contain.
+ *
+ * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
+ * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
-@TeleOp(name = "TeleOp")
+
+@TeleOp(name="Basic: Intro", group="Iterative Opmode")
 //@Disabled
-public class ClassTeleOp extends OpMode {
+public class BasicOpModeIntro extends OpMode
+{
+    // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
 
-    private DcMotor frontLeftMotor;
-    private DcMotor frontRightMotor;
-    private DcMotor backLeftMotor;
-    private DcMotor backRightMotor;
-
-    double drive;
-    double turn;
-
-
+    private Robot robot;
+    /*
+     * Code to run ONCE when the driver hits INIT
+     */
     @Override
     public void init() {
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeft");
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeft");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRight");
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRight");
-
-        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-        frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
-        backRightMotor.setDirection(DcMotor.Direction.FORWARD);
-
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-
+        robot = new Robot(hardwareMap, telemetry);
     }
 
     /*
-     * Code to run when the op mode is first enabled goes here
-     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
+     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     @Override
     public void init_loop() {
     }
 
     /*
-     * This method will be called ONCE when start is pressed
-     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#loop()
+     * Code to run ONCE when the driver hits PLAY
      */
     @Override
     public void start() {
@@ -90,19 +79,36 @@ public class ClassTeleOp extends OpMode {
     }
 
     /*
-     * This method will be called repeatedly in a loop
-     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#loop()
+     * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
     @Override
     public void loop() {
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
+        // Setup a variable for each drive wheel to save power level for telemetry
 
-        drive = gamepad1.left_stick_y;
-        turn = gamepad1.right_stick_x;
+        // POV Mode uses left stick to go forward, and right stick to turn.
+        double drive = -gamepad1.left_stick_y;
+        double turn  =  gamepad1.right_stick_x;
+        double strafe = gamepad1.left_stick_x;
+        boolean spinningLeft = gamepad1.x;
+        boolean spinningRight = gamepad1.b;
 
-        frontLeftMotor.setPower(drive - turn);
-        backLeftMotor.setPower(drive - turn);
-        frontRightMotor.setPower(drive + turn);
-        backRightMotor.setPower(drive + turn);
+
+
+         // Send calculated power to wheels
+        robot.drive(drive, turn, strafe);
+        robot.spinLeft(spinningLeft);
+        robot.spinRight(spinningRight);
+
+
+        // Show the elapsed game time and wheel power.
+
     }
+
+    /*
+     * Code to run ONCE after the driver hits STOP
+     */
+    @Override
+    public void stop() {
+    }
+
 }

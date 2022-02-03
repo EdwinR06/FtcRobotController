@@ -1,31 +1,41 @@
 package org.firstinspires.ftc.teamcode.shared;
 
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Robot {
-    private Chassis chassis;
+
+    private HardwareMap hardwareMap;
     private Telemetry telemetry;
+    private Chassis chassis;
+    private SpinningArm spinningArm;
 
-    public Robot(Telemetry telemetry) {
+    public Robot(HardwareMap hardwareMap, Telemetry telemetry) {
+        this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
-        chassis = new Chassis(telemetry);
+        chassis = new Chassis(hardwareMap,telemetry);
+        spinningArm = new SpinningArm(hardwareMap, telemetry);
     }
 
-    public Chassis getChassis() {
-        return chassis;
+    void driveStraight(double distance){
+        chassis.driveStraight(distance);
+
+    }
+    void pointTurn(double angle,boolean rightTurn) {
+        chassis.pointTurn(angle,rightTurn);
     }
 
-    public void driveStraight(double distance, double power){
-        chassis.driveStraight(distance, power);
-    }
-
-    public void turnAuto(double degree, double power){
-        chassis.turnAuto(degree, power);
-    }
-
-    public void drive(double drive, double turn, double strafe){
+    void drive(double drive, double turn, double strafe){
         chassis.drive(drive, turn, strafe);
     }
+
+    void spinLeft(boolean spin){
+        spinningArm.spinLeft(spin);
+    }
+    void spinRight(boolean spin) { spinningArm.spinRight(spin); }
+    void spinLeftAuto(){ spinningArm.spinLeftAuto(); }
+    void spinRightAuto(){ spinningArm.spinRightAuto(); }
 
 
 }
