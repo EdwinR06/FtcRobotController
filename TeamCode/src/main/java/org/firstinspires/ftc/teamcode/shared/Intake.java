@@ -1,0 +1,31 @@
+package org.firstinspires.ftc.teamcode.shared;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+public class Intake {
+
+    private DcMotor intakeMotor = null;
+    private HardwareMap hardwareMap;
+    private Telemetry telemetry;
+
+    public Intake(HardwareMap hardwareMap, Telemetry telemetry) {
+        this.hardwareMap = hardwareMap;
+        this.telemetry = telemetry;
+
+        intakeMotor = hardwareMap.get(DcMotor.class, "spinning_arm_motor");
+
+        intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+    }
+
+    void intake(double power) {
+        intakeMotor.setPower(power);
+    }
+
+    void deposit(double power) {
+        intakeMotor.setPower(-power);
+    }
+
+}

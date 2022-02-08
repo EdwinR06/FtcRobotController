@@ -91,6 +91,8 @@ public class BasicOpModeIntro extends OpMode
         double strafe = gamepad1.left_stick_x;
         boolean spinningLeft = gamepad1.x;
         boolean spinningRight = gamepad1.b;
+        double intakePower = gamepad1.left_trigger;
+        double depositPower = gamepad1.right_trigger;
 
 
 
@@ -98,6 +100,8 @@ public class BasicOpModeIntro extends OpMode
         robot.drive(drive, turn, strafe);
         robot.spinLeft(spinningLeft);
         robot.spinRight(spinningRight);
+        robot.intake(intakePower);
+        robot.deposit(depositPower);
 
 
         // Show the elapsed game time and wheel power.

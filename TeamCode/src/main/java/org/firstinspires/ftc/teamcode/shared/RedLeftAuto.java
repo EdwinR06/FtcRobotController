@@ -42,9 +42,11 @@ public class RedLeftAuto extends LinearOpMode {
         robot.pointTurn(90, false);
         robot.driveStraight(23);
         robot.pointTurn(45, false);
+        robot.driveStraight(2);
         robot.spinRightAuto();
         sleep(2500);
-        robot.pointTurn(90, true);
+        robot.driveStraight(-2);
+        robot.pointTurn(130, true);
         robot.driveStraight(23);
 
 
