@@ -50,4 +50,10 @@ public class Robot {
         intakeMotor.deposit(power);
     }
 
+    void intakeAuto() { intakeMotor.intakeAuto(); }
+
+    void depositAuto() {
+        intakeMotor.depositAuto();
+    }
+
 }

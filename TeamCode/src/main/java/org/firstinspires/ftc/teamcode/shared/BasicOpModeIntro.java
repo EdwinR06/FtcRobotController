@@ -95,7 +95,6 @@ public class BasicOpModeIntro extends OpMode
         double depositPower = gamepad1.right_trigger;
 
 
-
          // Send calculated power to wheels
         robot.drive(drive, turn, strafe);
         robot.spinLeft(spinningLeft);

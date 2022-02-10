@@ -15,7 +15,7 @@ public class Intake {
         this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
 
-        intakeMotor = hardwareMap.get(DcMotor.class, "spinning_arm_motor");
+        intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
 
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
     }
@@ -26,6 +26,14 @@ public class Intake {
 
     void deposit(double power) {
         intakeMotor.setPower(-power);
+    }
+
+    void intakeAuto() {
+        intakeMotor.setPower(1);
+    }
+
+    void depositAuto(){
+        intakeMotor.setPower(-1);
     }
 
 }
