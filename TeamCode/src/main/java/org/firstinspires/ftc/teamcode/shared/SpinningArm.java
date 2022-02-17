@@ -48,12 +48,12 @@ public class SpinningArm {
     }
 
     void spinLeftAuto(){
-        spinningArm.setPower(.7);
+        spinningArm.setPower(.6);
 
     }
 
     void spinRightAuto(){
-        spinningArm.setPower(-.7);
+        spinningArm.setPower(-.6);
     }
 
 
