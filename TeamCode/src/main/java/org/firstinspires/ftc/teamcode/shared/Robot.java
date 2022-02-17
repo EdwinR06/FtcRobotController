@@ -17,7 +17,7 @@ public class Robot {
         this.telemetry = telemetry;
         chassis = new Chassis(hardwareMap,telemetry);
         spinningArm = new SpinningArm(hardwareMap, telemetry);
-        intakeMotor = new Intake(hardwareMap, telemetry);
+        //intakeMotor = new Intake(hardwareMap, telemetry);
     }
 
     void driveStraight(double distance){
@@ -42,7 +42,7 @@ public class Robot {
 
     void spinRightAuto(){ spinningArm.spinRightAuto(); }
 
-    void intake(double power) {
+    /*void intake(double power) {
         intakeMotor.intake(power);
     }
 
@@ -54,6 +54,6 @@ public class Robot {
 
     void depositAuto() {
         intakeMotor.depositAuto();
-    }
+    }*/
 
 }

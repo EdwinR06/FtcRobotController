@@ -36,25 +36,24 @@ public class SpinningArm {
 
     void spinLeft(boolean spin){
         if(spin) {
-            spinningArm.setPower(.3);
+            spinningArm.setPower(.7);
         }
         spinningArm.setPower(0);
     }
     void spinRight(boolean spin) {
         if (spin) {
-            spinningArm.setPower(-.3);
+            spinningArm.setPower(-.7);
         }
         spinningArm.setPower(0);
     }
 
     void spinLeftAuto(){
-        spinningArm.setPower(.2);
+        spinningArm.setPower(.7);
 
     }
 
     void spinRightAuto(){
-        spinningArm.setPower(-.2);
-
+        spinningArm.setPower(-.7);
     }
 
 
