@@ -48,15 +48,15 @@ public class BlueRightAuto extends LinearOpMode {
         robot.driveStraight(23);
         */
         robot.driveStraight(-6);
-        robot.pointTurn(45, false);
-        robot.driveStraight(-23);
+        robot.pointTurn(28, false);
+        robot.driveStraight(-30);
         robot.pushBlockForward();
         sleep(1000);
         robot.resetBumper();
         sleep(250);
         robot.driveStraight(6);
         robot.pointTurn(30, false);
-        robot.driveStraight(23);
+        robot.driveStraight(43);
         robot.spinLeftAuto();
         sleep(2500);
         robot.pointTurn(75, false);
