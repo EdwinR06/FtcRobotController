@@ -43,7 +43,7 @@ public class BlueLeftAuto extends LinearOpMode {
         robot.driveStraight(24.5);
         robot.driveStraight(-50);
         robot.pointTurn(45, true);
-        robot.driveStraight(-10);
+        robot.driveStraight(-14);
 
 
     }

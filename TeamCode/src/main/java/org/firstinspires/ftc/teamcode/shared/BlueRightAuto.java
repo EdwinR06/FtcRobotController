@@ -38,8 +38,24 @@ public class BlueRightAuto extends LinearOpMode {
             telemetry.addData("Left Front Encoder", leftFront.getCurrentPosition());
             telemetry.update();
         }*/
+        /*
         robot.driveStraight(3);
-        robot.pointTurn(90, true);
+        robot.pointTurn(92, true);
+        robot.driveStraight(23);
+        robot.spinLeftAuto();
+        sleep(2500);
+        robot.pointTurn(75, false);
+        robot.driveStraight(23);
+        */
+        robot.driveStraight(-6);
+        robot.pointTurn(45, false);
+        robot.driveStraight(-23);
+        robot.pushBlockForward();
+        sleep(1000);
+        robot.resetBumper();
+        sleep(250);
+        robot.driveStraight(6);
+        robot.pointTurn(30, false);
         robot.driveStraight(23);
         robot.spinLeftAuto();
         sleep(2500);

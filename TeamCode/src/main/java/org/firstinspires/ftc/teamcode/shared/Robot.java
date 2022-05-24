@@ -11,13 +11,17 @@ public class Robot {
     private Chassis chassis;
     private SpinningArm spinningArm;
     private Intake intakeMotor;
+    private Bumper bumperMotor;
+    private Blocker blockerMotor;
 
     public Robot(HardwareMap hardwareMap, Telemetry telemetry) {
         this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
         chassis = new Chassis(hardwareMap,telemetry);
         spinningArm = new SpinningArm(hardwareMap, telemetry);
-        //intakeMotor = new Intake(hardwareMap, telemetry);
+        intakeMotor = new Intake(hardwareMap, telemetry);
+        bumperMotor = new Bumper(hardwareMap, telemetry);
+        blockerMotor = new Blocker(hardwareMap, telemetry);
     }
 
     void driveStraight(double distance){
@@ -42,7 +46,7 @@ public class Robot {
 
     void spinRightAuto(){ spinningArm.spinRightAuto(); }
 
-    /*void intake(double power) {
+    void intake(double power) {
         intakeMotor.intake(power);
     }
 
@@ -54,6 +58,14 @@ public class Robot {
 
     void depositAuto() {
         intakeMotor.depositAuto();
-    }*/
+    }
+
+    void pushBlockForward() { bumperMotor.pushBlockForward(); }
+
+    void resetBumper() { bumperMotor.resetBumper(); }
+
+    void closeBlocker() { blockerMotor.closeBlocker(); }
+
+    void openBlocker() { blockerMotor.openBlocker(); }
 
 }

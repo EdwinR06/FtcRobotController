@@ -93,14 +93,20 @@ public class BasicOpModeIntro extends OpMode
         boolean spinningRight = gamepad1.b;
         double intakePower = gamepad1.left_trigger;
         double depositPower = gamepad1.right_trigger;
+        boolean bumper = gamepad1.y;
 
 
-         // Send calculated power to wheels
+         // Send calculated power to wheel
         robot.drive(drive, turn, strafe);
         robot.spinLeft(spinningLeft);
         robot.spinRight(spinningRight);
-        //robot.intake(intakePower);
-        //robot.deposit(depositPower);
+        robot.intake(intakePower);
+        robot.deposit(depositPower);
+        if(bumper) {
+            robot.pushBlockForward();
+        } else if(!bumper) {
+            robot.resetBumper();
+        }
 
 
         // Show the elapsed game time and wheel power.
