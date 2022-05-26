@@ -38,6 +38,7 @@ public class RedLeftAuto extends LinearOpMode {
             telemetry.addData("Left Front Encoder", leftFront.getCurrentPosition());
             telemetry.update();
         }*/
+        /*
         robot.driveStraight(5);
         robot.pointTurn(90, false);
         robot.driveStraight(23);
@@ -48,7 +49,21 @@ public class RedLeftAuto extends LinearOpMode {
         robot.driveStraight(-2);
         robot.pointTurn(130, true);
         robot.driveStraight(23);
-
+        */
+        robot.driveStraight(-6);
+        robot.pointTurn(28, true);
+        robot.driveStraight(-29.5);
+        robot.pushBlockForward();
+        sleep(2500);
+        robot.resetBumper();
+        sleep(250);
+        robot.driveStraight(6);
+        robot.pointTurn(30, true);
+        robot.driveStraight(43);
+        robot.spinRightAuto();
+        sleep(2500);
+        robot.pointTurn(125, true);
+        robot.driveStraight(23);
 
     }
 }

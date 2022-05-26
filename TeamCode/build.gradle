@@ -25,6 +25,7 @@ android {
     androidResources {
         noCompress 'tflite'
     }
+    namespace 'org.firstinspires.ftc.teamcode'
 }
 
 dependencies {

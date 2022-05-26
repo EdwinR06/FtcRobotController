@@ -38,13 +38,15 @@ public class BlueLeftAuto extends LinearOpMode {
             telemetry.addData("Left Front Encoder", leftFront.getCurrentPosition());
             telemetry.update();
         }*/
+        /*
         robot.driveStraight(23);
         robot.pointTurn(54, true);
         robot.driveStraight(24.5);
         robot.driveStraight(-50);
         robot.pointTurn(45, true);
         robot.driveStraight(-14);
-
+        */
+        robot.driveStraight(30);
 
     }
 }

@@ -38,13 +38,15 @@ public class RedRightAuto extends LinearOpMode {
             telemetry.addData("Left Front Encoder", leftFront.getCurrentPosition());
             telemetry.update();
         }*/
+        /*
         robot.driveStraight(23);
         robot.pointTurn(54, false);
         robot.driveStraight(24.5);
         robot.driveStraight(-50);
         robot.pointTurn(45, false);
         robot.driveStraight(-10);
-
+        */
+        robot.driveStraight(30);
 
     }
 }
