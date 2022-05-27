@@ -52,18 +52,18 @@ public class RedLeftAuto extends LinearOpMode {
         */
         robot.driveStraight(-6);
         robot.pointTurn(28, true);
-        robot.driveStraight(-29.5);
+        robot.driveStraight(-29);
         robot.pushBlockForward();
         sleep(2500);
         robot.resetBumper();
         sleep(250);
         robot.driveStraight(6);
         robot.pointTurn(30, true);
-        robot.driveStraight(43);
+        robot.driveStraight(43.25);
         robot.spinRightAuto();
-        sleep(2500);
+        sleep(3000);
         robot.pointTurn(125, true);
-        robot.driveStraight(23);
+        robot.driveStraight(23.5);
 
     }
 }
