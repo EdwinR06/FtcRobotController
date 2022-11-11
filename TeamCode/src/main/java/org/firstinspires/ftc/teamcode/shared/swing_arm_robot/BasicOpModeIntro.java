@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.shared;
+package org.firstinspires.ftc.teamcode.shared.swing_arm_robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -89,23 +89,23 @@ public class BasicOpModeIntro extends OpMode
         double drive = -gamepad1.left_stick_y;
         double turn  =  gamepad1.right_stick_x;
         double strafe = gamepad1.left_stick_x;
-        boolean spinningLeft = gamepad1.x;
-        boolean spinningRight = gamepad1.b;
-        double intakePower = gamepad1.left_trigger;
-        double depositPower = gamepad1.right_trigger;
-        boolean bumper = gamepad1.y;
+        boolean swing = gamepad1.x;
+        boolean gripper = gamepad1.y;
+
+        robot.getRed();
 
 
          // Send calculated power to wheel
         robot.drive(drive, turn, strafe);
-        robot.spinLeft(spinningLeft);
-        robot.spinRight(spinningRight);
-        robot.intake(intakePower);
-        robot.deposit(depositPower);
-        if(bumper) {
-            robot.pushBlockForward();
-        } else if(!bumper) {
-            robot.resetBumper();
+        if(gripper) {
+            robot.grip();
+        } else {
+            robot.unGrip();
+        }
+        if(swing) {
+            robot.swing();
+        } else {
+            robot.unSwing();
         }
 
 

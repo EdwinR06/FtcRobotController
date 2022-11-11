@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.shared;
+package org.firstinspires.ftc.teamcode.shared.swing_arm_robot;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;

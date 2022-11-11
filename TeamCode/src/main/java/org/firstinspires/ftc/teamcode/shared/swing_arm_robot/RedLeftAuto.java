@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.shared;
+package org.firstinspires.ftc.teamcode.shared.swing_arm_robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -17,9 +17,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
-@Autonomous(name="blue right", group="Iterative Opmode")
+@Autonomous(name="red left", group="Iterative Opmode")
 //@Disabled
-public class BlueRightAuto extends LinearOpMode {
+public class RedLeftAuto extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
 
@@ -34,32 +34,5 @@ public class BlueRightAuto extends LinearOpMode {
         runtime.reset();
         Robot robot=new Robot(hardwareMap, telemetry);
 
-        /*while(opModeIsActive()) {
-            telemetry.addData("Left Front Encoder", leftFront.getCurrentPosition());
-            telemetry.update();
-        }*/
-        /*
-        robot.driveStraight(3);
-        robot.pointTurn(92, true);
-        robot.driveStraight(23);
-        robot.spinLeftAuto();
-        sleep(2500);
-        robot.pointTurn(75, false);
-        robot.driveStraight(23);
-        */
-        robot.driveStraight(-6);
-        robot.pointTurn(28, false);
-        robot.driveStraight(-29);
-        robot.pushBlockForward();
-        sleep(2500);
-        robot.resetBumper();
-        sleep(250);
-        robot.driveStraight(6);
-        robot.pointTurn(30, false);
-        robot.driveStraight(43.25);
-        robot.spinLeftAuto();
-        sleep(3000);
-        robot.pointTurn(125, false);
-        robot.driveStraight(23.5);
     }
 }
