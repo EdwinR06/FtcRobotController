@@ -20,10 +20,10 @@ public class Chassis {
         this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
 
-        leftFront = hardwareMap.get(DcMotor.class, "front_left_motor");
-        leftRear = hardwareMap.get(DcMotor.class, "back_left_motor");
-        rightFront = hardwareMap.get(DcMotor.class, "front_right_motor");
-        rightRear = hardwareMap.get(DcMotor.class, "back_right_motor");
+        leftFront = hardwareMap.get(DcMotor.class, "front_left");
+        leftRear = hardwareMap.get(DcMotor.class, "back_left");
+        rightFront = hardwareMap.get(DcMotor.class, "front_right");
+        rightRear = hardwareMap.get(DcMotor.class, "back_right");
 
         leftFront.setDirection(DcMotor.Direction.REVERSE);
         leftRear.setDirection(DcMotor.Direction.REVERSE);

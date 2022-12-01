@@ -4,8 +4,6 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.shared.swing_arm_robot.Chassis;
-import org.firstinspires.ftc.teamcode.shared.swing_arm_robot.Gripper;
 
 public class Robot {
 
