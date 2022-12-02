@@ -30,17 +30,17 @@ public class SwingArm {
         double ticksToRun = TICKS_PER_ROTATION * (102/360);
         int ticksSoFar = 0;
         int startPos = swingArmRight.getCurrentPosition();
-        swingArmRight.setPower(.2);
-        swingArmLeft.setPower(.2);
+        swingArmRight.setPower(1);
+        swingArmLeft.setPower(1);
 
         while (ticksSoFar<ticksToRun){
             ticksSoFar = Math.abs(swingArmRight.getCurrentPosition() - startPos);
             if(ticksSoFar >= TICKS_PER_ROTATION * (25/360)){
-                swingArmRight.setPower(.3);
-                swingArmLeft.setPower(.3);
+                swingArmRight.setPower(.75);
+                swingArmLeft.setPower(.75);
             } else if(ticksSoFar >= TICKS_PER_ROTATION * (80/360)) {
-                swingArmRight.setPower(.2);
-                swingArmLeft.setPower(.2);
+                swingArmRight.setPower(.6);
+                swingArmLeft.setPower(.6);
             }
         }
         swingArmRight.setPower(0);

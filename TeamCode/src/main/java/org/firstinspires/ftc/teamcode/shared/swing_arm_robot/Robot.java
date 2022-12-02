@@ -20,7 +20,7 @@ public class Robot {
         chassis = new Chassis(hardwareMap,telemetry);
         gripper = new Gripper(hardwareMap, telemetry);
         swingArm = new SwingArm(hardwareMap, telemetry);
-        colorSensor = new ColorSensors(hardwareMap, telemetry);
+        //colorSensor = new ColorSensors(hardwareMap, telemetry);
     }
 
     void driveStraight(double distance){
@@ -51,8 +51,8 @@ public class Robot {
         swingArm.unSwing();
     }
 
-    void getRed() {
+    /*void getRed() {
         colorSensor.getRed();
-    }
+    }*/
 
 }

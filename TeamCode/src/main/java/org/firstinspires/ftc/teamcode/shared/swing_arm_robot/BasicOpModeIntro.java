@@ -92,7 +92,7 @@ public class BasicOpModeIntro extends OpMode
         boolean swing = gamepad1.x;
         boolean gripper = gamepad1.y;
 
-        robot.getRed();
+        //robot.getRed();
 
 
          // Send calculated power to wheel
