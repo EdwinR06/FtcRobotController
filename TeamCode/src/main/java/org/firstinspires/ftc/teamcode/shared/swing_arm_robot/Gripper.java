@@ -20,10 +20,10 @@ public class Gripper {
     }
 
     public void grip(){
-        gripperServo.setPosition(1.0);
+        gripperServo.setPosition(0.0);
     }
 
     public void unGrip() {
-        gripperServo.setPosition(0.0);
+        gripperServo.setPosition(1.0);
     }
 }

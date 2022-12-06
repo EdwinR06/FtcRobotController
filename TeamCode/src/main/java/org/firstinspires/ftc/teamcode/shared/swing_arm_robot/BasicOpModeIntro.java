@@ -90,7 +90,9 @@ public class BasicOpModeIntro extends OpMode
         double turn  =  gamepad1.right_stick_x;
         double strafe = gamepad1.left_stick_x;
         boolean swing = gamepad1.x;
-        boolean gripper = gamepad1.y;
+        boolean unswing = gamepad1.y;
+        boolean gripper = gamepad1.a;
+        boolean ungrip = gamepad1.b;
 
         //robot.getRed();
 
@@ -99,12 +101,15 @@ public class BasicOpModeIntro extends OpMode
         robot.drive(drive, turn, strafe);
         if(gripper) {
             robot.grip();
-        } else {
+        }
+        if (ungrip){
             robot.unGrip();
         }
+
         if(swing) {
             robot.swing();
-        } else {
+        }
+        if(unswing){
             robot.unSwing();
         }
 
