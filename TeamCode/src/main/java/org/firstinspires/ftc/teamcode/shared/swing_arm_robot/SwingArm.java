@@ -30,8 +30,8 @@ public class SwingArm {
         double ticksToRun = TICKS_PER_ROTATION * (112.0/360.0);
         int ticksSoFar = 0;
         int startPos = swingArmRight.getCurrentPosition();
-        swingArmRight.setPower(.4);
-        swingArmLeft.setPower(.4);
+        swingArmRight.setPower(.5);
+        swingArmLeft.setPower(.5);
 
         telemetry.addData("ticks so far",ticksSoFar);
         telemetry.addData("ticks to run",ticksToRun);
@@ -41,16 +41,14 @@ public class SwingArm {
             ticksSoFar = Math.abs(swingArmRight.getCurrentPosition() - startPos);
             telemetry.addData("ticks",ticksSoFar);
             telemetry.update();
-            /*
-            if(ticksSoFar >= TICKS_PER_ROTATION * (25/360)){
-                swingArmRight.setPower(.75);
-                swingArmLeft.setPower(0);
-            } else if(ticksSoFar >= TICKS_PER_ROTATION * (80/360)) {
-                swingArmRight.setPower(.6);
-                swingArmLeft.setPower(0);
-            }
 
-             */
+            if(ticksSoFar >= TICKS_PER_ROTATION * (25/360)){
+                swingArmRight.setPower(.6);
+                swingArmLeft.setPower(.6);
+            } else if(ticksSoFar >= TICKS_PER_ROTATION * (80/360)) {
+                swingArmRight.setPower(.03);
+                swingArmLeft.setPower(0.03);
+            }
         }
         swingArmRight.setPower(0);
         swingArmLeft.setPower(0);
