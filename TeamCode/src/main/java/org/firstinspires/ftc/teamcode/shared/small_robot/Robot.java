@@ -9,6 +9,7 @@ public class Robot {
     private Telemetry telemetry;
     private Chassis chassis;
     private LinearSlide linearSlide;
+    private Gripper gripper;
 
     public Robot(HardwareMap hardwareMap, Telemetry telemetry){
         this.hardwareMap=hardwareMap;
@@ -16,6 +17,7 @@ public class Robot {
 
         chassis=new Chassis(hardwareMap, telemetry);
         linearSlide=new LinearSlide(hardwareMap, telemetry);
+        gripper = new Gripper(telemetry, hardwareMap);
     }
 
     public void drive(double drive, double turn, double strafe){
@@ -40,5 +42,13 @@ public class Robot {
 
     public void slideUp() throws InterruptedException {
         linearSlide.slideUp();
+    }
+
+    void grip() {
+        gripper.grip();
+    }
+
+    void unGrip() {
+        gripper.unGrip();
     }
 }
