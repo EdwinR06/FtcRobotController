@@ -41,6 +41,7 @@ public class Tele1 extends OpMode {
         double strafe = gamepad1.left_stick_x;
         double turn  =  gamepad1.right_stick_x;
         boolean slideup = gamepad1.a;
+        boolean slidedown = gamepad1.b;
         boolean gripper = gamepad1.x;
         boolean ungripper = gamepad1.y;
 
@@ -64,6 +65,14 @@ public class Tele1 extends OpMode {
         if(slideup){
             try {
                 robot.slideUp();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(slidedown){
+            try {
+                robot.slideDown();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

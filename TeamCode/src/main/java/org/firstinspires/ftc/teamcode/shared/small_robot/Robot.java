@@ -44,6 +44,10 @@ public class Robot {
         linearSlide.slideUp();
     }
 
+    public void slideDown() throws InterruptedException {
+        linearSlide.slideDown();
+    }
+
     void grip() {
         gripper.grip();
     }

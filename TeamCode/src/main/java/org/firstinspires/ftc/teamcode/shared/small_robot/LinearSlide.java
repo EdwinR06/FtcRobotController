@@ -29,12 +29,12 @@ public class LinearSlide {
         int tickSoFar=0;
         int startPosition=linearSlide.getCurrentPosition();
 
-        linearSlide.setPower(0.9);
+        linearSlide.setPower(-0.9);
 
         while (tickSoFar<ticksToRun){
             tickSoFar=Math.abs(linearSlide.getCurrentPosition()-startPosition);
         }
-        linearSlide.setPower(0.36);
+        linearSlide.setPower(-0.36);
         TimeUnit.MILLISECONDS.sleep(1000);
         slideDown();
     }
@@ -44,12 +44,12 @@ public class LinearSlide {
         int tickSoFar=0;
         int startPosition=linearSlide.getCurrentPosition();
 
-        linearSlide.setPower(-0.9);
+        linearSlide.setPower(0.1);
 
         while (tickSoFar<ticksToRun){
             tickSoFar=Math.abs(linearSlide.getCurrentPosition()-startPosition);
         }
-        linearSlide.setPower(-0.36);
+        linearSlide.setPower(0.05);
         TimeUnit.MILLISECONDS.sleep(1000);
         linearSlide.setPower(0);
     }
