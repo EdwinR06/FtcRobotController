@@ -12,6 +12,7 @@ public class Robot {
     private Chassis chassis;
     private LinearSlide linearSlide;
     private Gripper gripper;
+    private Color colorSensor;
 
 
     public Robot(HardwareMap hardwareMap, Telemetry telemetry){
@@ -21,6 +22,7 @@ public class Robot {
         chassis=new Chassis(hardwareMap, telemetry);
         linearSlide=new LinearSlide(hardwareMap, telemetry);
         gripper = new Gripper(telemetry, hardwareMap);
+        colorSensor = new Color(hardwareMap, telemetry);
     }
 
     public void drive(double drive, double turn, double strafe){
@@ -58,6 +60,17 @@ public class Robot {
 
     void unGrip() {
         gripper.unGrip();
+    }
+
+    public int getRed() {
+        return colorSensor.getRed();
+    }
+    public int getBlue() {
+        return colorSensor.getBlue();
+    }
+
+    public int getGreen() {
+        return colorSensor.getGreen();
     }
 
 
