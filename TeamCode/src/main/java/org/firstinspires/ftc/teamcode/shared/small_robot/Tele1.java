@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.shared.small_robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -11,6 +13,7 @@ public class Tele1 extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private Robot robot;
+    private static final double Ticks_Per_Inch=39.6;
     //private Servo claw = null;
 
     //double clawPosition = CLAW_HOME;
@@ -26,7 +29,8 @@ public class Tele1 extends OpMode {
     }
 
     @Override
-    public void init_loop(){}
+    public void init_loop(){
+    }
 
     @Override
     public void loop() {
@@ -39,32 +43,25 @@ public class Tele1 extends OpMode {
 
         double drive = gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x;
-        double turn  =  gamepad1.right_stick_x;
+        double turn = gamepad1.right_stick_x;
         boolean slideup = gamepad1.a;
         boolean slidedown = gamepad1.b;
         boolean gripper = gamepad1.x;
         boolean ungripper = gamepad1.y;
 
-        if(gripper) {
+        if (gripper) {
             robot.grip();
-        } else if(ungripper) {
+        } else if (ungripper) {
             robot.unGrip();
         }
 
 
         robot.drive(drive, turn, strafe);
 
-        /*if(gamepad1.b)
-            clawPosition += CLAW_SPEED;
-        else if(gamepad1.y)
-            clawPosition -= CLAW_SPEED;
-
-        clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
-        claw.setPosition(clawPosition);*/
 
         if(slideup){
             try {
-                robot.slideUp();
+                robot.slideRaise();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -72,18 +69,17 @@ public class Tele1 extends OpMode {
 
         if(slidedown){
             try {
-                robot.slideDown();
+                robot.slideLower();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
 
-        //telemetry.addData("claw","%2f", clawPosition);
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.update();
+            //telemetry.addData("claw","%2f", clawPosition);
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.update();
 
+        }
     }
-    @Override
-    public void stop(){}
-}
+

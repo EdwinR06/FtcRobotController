@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.shared.small_robot;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -13,6 +14,7 @@ public class LinearSlide {
     private DcMotor linearSlide = null;
     private static final double Ticks_Per_Inch=39.6;
 
+
     public LinearSlide(HardwareMap hardwareMap, Telemetry telemetry){
         this.hardwareMap=hardwareMap;
         this.telemetry=telemetry;
@@ -23,6 +25,8 @@ public class LinearSlide {
 
         linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
+
+
     public void slideUp() throws InterruptedException {
         double ticksToRun=25*Ticks_Per_Inch;
 
@@ -36,7 +40,7 @@ public class LinearSlide {
         }
         linearSlide.setPower(-0.36);
         TimeUnit.MILLISECONDS.sleep(1000);
-        slideDown();
+        //slideDown();
     }
     public void slideDown() throws InterruptedException {
         double ticksToRun=25*Ticks_Per_Inch;
@@ -44,13 +48,24 @@ public class LinearSlide {
         int tickSoFar=0;
         int startPosition=linearSlide.getCurrentPosition();
 
-        linearSlide.setPower(0.1);
+        linearSlide.setPower(0.2);
 
         while (tickSoFar<ticksToRun){
             tickSoFar=Math.abs(linearSlide.getCurrentPosition()-startPosition);
         }
-        linearSlide.setPower(0.05);
+        linearSlide.setPower(0.3);
         TimeUnit.MILLISECONDS.sleep(1000);
+        linearSlide.setPower(0);
+    }
+
+    public void slideLower(){
+        linearSlide.setPower(0.4);
+    }
+    public void slideRaise(){
+        linearSlide.setPower(-0.8);
+    }
+
+    public void stopSlide() {
         linearSlide.setPower(0);
     }
 }

@@ -23,6 +23,6 @@ public class Gripper {
     }
 
     public void unGrip() {
-        gripperServo.setPosition(1.0);
+        gripperServo.setPosition(3.5);
     }
 }
