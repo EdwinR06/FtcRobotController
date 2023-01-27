@@ -14,5 +14,19 @@ public class LeftAuto extends LinearOpMode {
         runtime.reset();
         Robot robot=new Robot(hardwareMap, telemetry);
 
+        robot.driveStraight(18);
+        if(robot.getRed() > 300) {
+            robot.grip();
+            robot.slideUp();
+            robot.unGrip();
+            robot.slideDown();
+            robot.driveStrafe(23);
+        } else if(robot.getBlue() > 300) {
+            robot.grip();
+            robot.slideUp();
+            robot.unGrip();
+            robot.slideDown();
+            robot.driveStrafe(-23);
+        }
     }
 }

@@ -14,7 +14,7 @@ public class Color {
         this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
 
-        colorSensor = hardwareMap.get(ColorSensor.class, "color");
+        colorSensor = hardwareMap.get(ColorSensor.class, "Color");
     }
 
     public int getRed() {

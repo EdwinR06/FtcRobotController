@@ -73,5 +73,13 @@ public class Robot {
         return colorSensor.getGreen();
     }
 
+    public void slideUp() throws InterruptedException {
+        linearSlide.slideUp();
+    }
+
+    public void slideDown() throws InterruptedException {
+        linearSlide.slideDown();
+    }
+
 
 }
