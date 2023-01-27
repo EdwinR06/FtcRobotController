@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="Auto", group="Linear Opmode")
-public class Auto extends LinearOpMode {
+@Autonomous(name="Right Auto", group="Linear Opmode")
+public class RightAuto extends LinearOpMode {
     private ElapsedTime runtime=new ElapsedTime();
 
     @Override
@@ -13,23 +13,6 @@ public class Auto extends LinearOpMode {
         waitForStart();
         runtime.reset();
         Robot robot=new Robot(hardwareMap, telemetry);
-        if(robot.getRed() > 0 && robot.getRed() < 100) {
 
-        }
-
-
-        robot.driveStraight(30);
-
-        robot.driveStraight(-30);
-
-        robot.driveTurn(30);
-
-        robot.driveTurn(-30);
-
-        robot.driveStrafe(10);
-
-        robot.driveStrafe(-10);
-
-        robot.linear(10);
     }
 }
