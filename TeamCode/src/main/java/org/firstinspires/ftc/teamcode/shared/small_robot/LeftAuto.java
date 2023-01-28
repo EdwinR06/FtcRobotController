@@ -9,33 +9,20 @@ public class LeftAuto extends LinearOpMode {
     private ElapsedTime runtime=new ElapsedTime();
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         waitForStart();
         runtime.reset();
         Robot robot=new Robot(hardwareMap, telemetry);
 
         robot.driveStraight(18);
-        if(robot.getRed() > 300) {
-            robot.grip();
-            robot.slideUp();
-            robot.driveStraight(.5);
-            robot.unGrip();
-            robot.slideDown();
+        robot.driveTurn(1);
+        if(robot.getRed() > 250) {
             robot.driveStrafe(23);
-        } else if(robot.getGreen() > 300){
-            robot.grip();
-            robot.slideUp();
-            robot.driveStraight(.5);
-            robot.unGrip();
-            robot.slideDown();
-            robot.driveStraight(-1);
-        } else if(robot.getBlue() > 300) {
-            robot.grip();
-            robot.slideUp();
-            robot.driveStraight(.5);
-            robot.unGrip();
-            robot.slideDown();
+        } else if(robot.getGreen() > 250){
+            robot.driveStraight(3);
+        } else if(robot.getBlue() > 250) {
             robot.driveStrafe(-23);
         }
+
     }
 }
