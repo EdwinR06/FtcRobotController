@@ -18,12 +18,21 @@ public class LeftAuto extends LinearOpMode {
         if(robot.getRed() > 300) {
             robot.grip();
             robot.slideUp();
+            robot.driveStraight(.5);
             robot.unGrip();
             robot.slideDown();
             robot.driveStrafe(23);
+        } else if(robot.getGreen() > 300){
+            robot.grip();
+            robot.slideUp();
+            robot.driveStraight(.5);
+            robot.unGrip();
+            robot.slideDown();
+            robot.driveStraight(-1);
         } else if(robot.getBlue() > 300) {
             robot.grip();
             robot.slideUp();
+            robot.driveStraight(.5);
             robot.unGrip();
             robot.slideDown();
             robot.driveStrafe(-23);

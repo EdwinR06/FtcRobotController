@@ -55,31 +55,28 @@ public class Tele1 extends OpMode {
             robot.unGrip();
         }
 
-
         robot.drive(drive, turn, strafe);
 
-
         if(slideup){
-            try {
+            robot.slideRaise();
+            /*try {
                 robot.slideRaise();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
         if(slidedown){
-            try {
+            robot.slideLower();
+            /*try {
                 robot.slideLower();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
-
-            //telemetry.addData("claw","%2f", clawPosition);
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
-
         }
     }
 

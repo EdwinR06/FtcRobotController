@@ -14,5 +14,14 @@ public class RightAuto extends LinearOpMode {
         runtime.reset();
         Robot robot=new Robot(hardwareMap, telemetry);
 
+        robot.driveStraight(18);
+        robot.driveTurn(1);
+        if(robot.getRed() > 300) {
+            robot.driveStrafe(23);
+        } else if(robot.getGreen() > 300){
+            robot.driveStraight(3);
+        } else if(robot.getBlue() > 300) {
+            robot.driveStrafe(-23);
+        }
     }
 }

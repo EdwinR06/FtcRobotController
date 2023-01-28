@@ -45,11 +45,11 @@ public class Robot {
         chassis.driveStrafe(strafeDistance);
     }
 
-    public void slideRaise() throws InterruptedException {
+    public void slideRaise() {
         linearSlide.slideRaise();
     }
 
-    public void slideLower() throws InterruptedException {
+    public void slideLower() {
         linearSlide.slideLower();
     }
 
