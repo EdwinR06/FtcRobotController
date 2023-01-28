@@ -18,14 +18,20 @@ public class Color {
     }
 
     public int getRed() {
+        telemetry.addData("Red", colorSensor.red());
+        telemetry.update();
         return colorSensor.red();
     }
 
     public int getBlue() {
+        telemetry.addData("Blue", colorSensor.blue());
+        telemetry.update();
         return colorSensor.blue();
     }
 
     public int getGreen() {
+        telemetry.addData("Green", colorSensor.green());
+        telemetry.update();
         return colorSensor.green();
     }
 }
