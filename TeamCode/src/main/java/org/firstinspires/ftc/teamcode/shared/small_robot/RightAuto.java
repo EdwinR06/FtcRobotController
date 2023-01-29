@@ -15,19 +15,22 @@ public class RightAuto extends LinearOpMode {
         Robot robot=new Robot(hardwareMap, telemetry);
 
 
-        robot.unGrip();
-        sleep(1000);
-        robot.driveStraight(19);
-
         robot.grip();
-        sleep(1000);
-        robot.driveTurn(-6);
+        sleep(200);
+        robot.driveStraight(19.25);
+
+        robot.driveTurn(-8);
         robot.driveStraight(12);
         robot.slideRaise();
         sleep(2350);
+        robot.driveTurn(-2.5);
+        robot.driveStraight(1.5);
+        robot.slideLower();
+        sleep(500);
         robot.unGrip();
         sleep(800);
+        robot.driveStraight(-5);
         robot.slideLower();
-        sleep(1000);
+        sleep(500);
     }
 }
