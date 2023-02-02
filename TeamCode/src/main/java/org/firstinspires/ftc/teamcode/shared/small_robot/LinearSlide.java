@@ -48,7 +48,7 @@ public class LinearSlide {
         int tickSoFar=0;
         int startPosition=linearSlide.getCurrentPosition();
 
-        linearSlide.setPower(0.2);
+        linearSlide.setPower(0.4);
 
         while (tickSoFar<ticksToRun){
             tickSoFar=Math.abs(linearSlide.getCurrentPosition()-startPosition);

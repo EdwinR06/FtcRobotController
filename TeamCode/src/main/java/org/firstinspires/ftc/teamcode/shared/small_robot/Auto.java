@@ -13,23 +13,27 @@ public class Auto extends LinearOpMode {
         waitForStart();
         runtime.reset();
         Robot robot=new Robot(hardwareMap, telemetry);
-        if(robot.getRed() > 0 && robot.getRed() < 100) {
-
+        int red;
+        int blue;
+        int green;
+        while(opModeIsActive()) {
+            red = robot.getRed();
+            blue = robot.getBlue();
+            green = robot.getGreen();
+            if(red > 150 && !(blue >= 125) && !(green >= 125)) {
+                robot.driveStraight(2);
+                robot.driveTurn(-18);
+                robot.driveStraight(23);
+                break;
+            } else if (blue > 150 && !(green >= 125) && !(red >= 125)) {
+                robot.driveStraight(2);
+                robot.driveTurn(18);
+                robot.driveStraight(23);
+                break;
+            } else if(green > 150) {
+                robot.driveStraight(5);
+                break;
+            }
         }
-
-
-        robot.driveStraight(30);
-
-        robot.driveStraight(-30);
-
-        robot.driveTurn(30);
-
-        robot.driveTurn(-30);
-
-        robot.driveStrafe(10);
-
-        robot.driveStrafe(-10);
-
-        robot.linear(10);
     }
 }
